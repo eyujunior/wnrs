@@ -3,8 +3,7 @@ import { Card, CardContent, makeStyles } from '@material-ui/core'
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 360,
-    margin: 'auto',
-    aspectRatio: '8/5',
+    height: 230,
     borderRadius: 60,
     display: 'flex',
     flexDirection: 'column',

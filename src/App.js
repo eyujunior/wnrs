@@ -1,5 +1,6 @@
 import WNRSCard from './components/card'
 import { levelOne, levelTwo, levelThree } from './decks/original'
+import NavBar from './components/navbar'
 import MUItheme from  './styles/MUItheme'
 import { Button, ThemeProvider, makeStyles, CssBaseline, MobileStepper } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
@@ -7,15 +8,12 @@ import { useEffect, useState } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    width: '100%',
+    height: 'calc(100vh - 64px)',
     display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'space-between',
-    alignItems: 'stretch',
-  },
-  levels: {
-    display: 'flex',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
     margin: theme.spacing(1),
@@ -23,6 +21,7 @@ const useStyles = makeStyles((theme) => ({
   stepper: {
     fontWeight: 700,
     color: theme.palette.primary.main,
+    width: 380,
   }
 }), {defaultTheme: MUItheme});
 
@@ -78,23 +77,21 @@ function App() {
   return (
     <ThemeProvider theme={MUItheme}>
       <CssBaseline/>
+      <NavBar level={level} handleLevelChange={handleLevelChange}/>
       <div className={classes.root}>
-      <div className={classes.levels}>
-        <Button value={1} variant={level === '1' ? 'contained' : 'outlined'} color='primary' className={classes.button} onClick={handleLevelChange}>Level 1 <br/> Perception</Button>
-        <Button value={2} variant={level === '2' ? 'contained' : 'outlined'} color='primary' className={classes.button} onClick={handleLevelChange}>Level 2 <br/> Connection</Button>
-        <Button value={3} variant={level === '3' ? 'contained' : 'outlined'} color='primary' className={classes.button} onClick={handleLevelChange}>Level 3 <br/> Reflection</Button>
-      </div>
-      <WNRSCard content={cards[`lv${level}`][step]} className={classes.card}/>
-      <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={step} className={classes.stepper}
-        nextButton={
-          <Button size="small" onClick={handleNext} color='primary' disabled={step === maxSteps - 1}>
-            <KeyboardArrowRight />
-          </Button> }
-        backButton={
-          <Button size="small" onClick={handleBack} color='primary' disabled={step === 0}>
-            <KeyboardArrowLeft />
-          </Button> }
-      />
+        <>
+          <WNRSCard content={cards[`lv${level}`][step]} className={classes.card}/>
+          <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={step} className={classes.stepper}
+            nextButton={
+              <Button size="small" onClick={handleNext} color='primary' disabled={step === maxSteps - 1}>
+                <KeyboardArrowRight />
+              </Button> }
+            backButton={
+              <Button size="small" onClick={handleBack} color='primary' disabled={step === 0}>
+                <KeyboardArrowLeft />
+              </Button> }
+          />
+        </>
       </div>
     </ThemeProvider>
   );
