@@ -1,17 +1,23 @@
-import { Card, CardContent, makeStyles } from '@material-ui/core'
+import { Card, CardContent, makeStyles, Box } from '@material-ui/core'
+import {forwardRef} from 'react'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: 360,
     height: 230,
     borderRadius: 60,
-    margin: theme.spacing(2, 0),
+    //margin: theme.spacing(2, 0),
     display: 'flex',
     flexDirection: 'column',
     padding: theme.spacing(2),
     ...theme.typography.h6,
     textTransform: 'uppercase',
     textAlign: 'center',
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    marginLeft: -180,
+    marginTop: -115,
   },
   normCard: {
     backgroundColor: theme.palette.background.paper,
@@ -50,14 +56,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-export default function WNRSCard(props) {
+export default forwardRef( function WNRSCard(props, ref) {
   const classes = useStyles();
   const isWildcard = props.content.startsWith('Wild Card')
   const isReminder = props.content.startsWith('Reminder')
   const question = isWildcard ? props.content.slice(10) : isReminder ? props.content.slice(9) : props.content;
 
   return (
-    <Card className={`${classes.root} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} variant='outlined' aria-label={props.content}>
+    <Box className={classes.root} ref={ref}>
+    <Card className={`${classes.root} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} variant='outlined' aria-label={props.content} style={props.trans}>
       <CardContent className={classes.content}>
       {isWildcard 
         ? <div className={classes.wildCardHeader}>
@@ -70,14 +77,15 @@ export default function WNRSCard(props) {
               Reminder
             </div>
           : null }
-        <div className={isReminder ? classes.reminderContent : null}>
+        <span className={isReminder ? classes.reminderContent : null} style={{whiteSpace: 'pre-line'}}>
           {question}
-        </div>
+        </span>
       </div>
       </CardContent>
       <CardContent className={classes.footer}>
         We're Not Really Strangers
       </CardContent>
     </Card>
+    </Box>
   )
-}
+})

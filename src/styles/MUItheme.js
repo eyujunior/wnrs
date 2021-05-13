@@ -11,7 +11,8 @@ var theme = createMuiTheme({
         ].join(','),
         fontSize: 12,
         h6: { 
-            fontSize: 14,
+            fontSize: 16,
+            lineHeight: 1.2,
             fontWeight: 700, 
         },
         body: {

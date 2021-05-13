@@ -159,3 +159,7 @@ export const levelThree = [
   "Wild Card Write down a goal for this year. Fold & exchange. Hold each other accountable. (Both players)",
   "Wild Card Both players write a note to your younger selves. (1 minute) Option to compare.",
 ];
+
+export const finalCard = [
+  'Each player write a\n message to the other.\n Fold and exchange.\n Open only once you two\n have parted.'
+]
