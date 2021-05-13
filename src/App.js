@@ -61,7 +61,7 @@ function App() {
 
   const handleLevelChange = (e) => {
     setLevel(e.currentTarget.value);
-    setStep(1);
+    setStep(0);
   }
 
   const handleNext = () => {
