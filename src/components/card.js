@@ -3,21 +3,22 @@ import {forwardRef} from 'react'
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    marginLeft: -180,
+    marginTop: -115,
+  },
+  card: {
     width: 360,
     height: 230,
     borderRadius: 60,
-    //margin: theme.spacing(2, 0),
     display: 'flex',
     flexDirection: 'column',
     padding: theme.spacing(2),
     ...theme.typography.h6,
     textTransform: 'uppercase',
     textAlign: 'center',
-    position: 'fixed',
-    top: '50%',
-    left: '50%',
-    marginLeft: -180,
-    marginTop: -115,
   },
   normCard: {
     backgroundColor: theme.palette.background.paper,
@@ -64,7 +65,7 @@ export default forwardRef( function WNRSCard(props, ref) {
 
   return (
     <Box className={classes.root} ref={ref}>
-    <Card className={`${classes.root} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} variant='outlined' aria-label={props.content} style={props.trans}>
+    <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} variant='outlined' aria-label={props.content} style={props.trans}>
       <CardContent className={classes.content}>
       {isWildcard 
         ? <div className={classes.wildCardHeader}>
