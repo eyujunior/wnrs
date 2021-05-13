@@ -1,2 +1,1 @@
-# wnrs
-Online version of We're Not Really Strangers.
+We're Not Really Strangers.
