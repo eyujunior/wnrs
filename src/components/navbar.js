@@ -2,6 +2,9 @@ import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem } from 
 import { useState } from 'react'
 
 const useStyles = makeStyles((theme) => ({
+  appBar: {
+    zIndex: '40',
+  },
   levelButton: {
     color: theme.palette.primary.contrastText,
   },
@@ -26,7 +29,7 @@ export default function NavBar({level, handleLevelChange}) {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar className={classes.appBar}>
       <Toolbar>
         <Typography variant="h6" className={classes.title}>WNRS</Typography>
         <Button className={classes.levelButton} variant='outlined' onClick={handleClick}> Level </Button>
