@@ -69,6 +69,16 @@ function App(props) {
     return tmp;
   }
 
+  const getFirstTrue = (obj) => {
+    return Object.keys(obj).find(i => obj[i]) 
+  }
+
+  const getAllTrue = (obj) => {
+    let trueArr = [];
+    Object.keys(obj).forEach(i => { if (obj[i]) trueArr.push(i)})
+    return trueArr;
+  }
+
   const onLevelChange = (e) => {
     setLevel(e.currentTarget.value);
     setStep(0);
@@ -81,7 +91,7 @@ function App(props) {
       ? Object.keys(Decks).forEach(key => { if (!Decks[key].isExpansion) disableObj[key] = false })
       : Object.keys(Decks).forEach(key => { if (key !== deck) disableObj[key] = false })
     let newPlayDecks = {...playDecks, [deck]: !playDecks[deck], ...disableObj}
-    let firstTrue = Object.keys(newPlayDecks).find(i => newPlayDecks[i]) 
+    let firstTrue = getFirstTrue(newPlayDecks)
     if (firstTrue === undefined) {
       newPlayDecks.main = true;
       firstTrue = 'main';
@@ -112,7 +122,7 @@ function App(props) {
   useEffect(() => {
     if (playDecks == null) return;
     let playCards = []
-    let levels = Decks[Object.keys(playDecks).find(i => playDecks[i])].levels
+    let levels = Decks[getFirstTrue(playDecks)].levels
     for (let i = 0; i < levels.length; i++) {
       let cards = []
       Object.keys(playDecks).forEach(key => { if (playDecks[key]) {
@@ -136,7 +146,7 @@ function App(props) {
       <div className={classes.root} style={{height: height}}>
         {cards[level-1].map((card, idx) => 
           <Slide direction="down" in={idx <= step} mountOnEnter unmountOnExit key={`Card${idx}`}>
-            <WNRSCard content={card} className={classes.card}  
+            <WNRSCard decks={getAllTrue(playDecks)} level={level} content={card} className={classes.card}  
               trans={{transform: `rotate(${rotations[idx]}deg) translateX(${transX[idx]}px) translateY(${transY[idx]}px)`}}/>
           </Slide>
         )}

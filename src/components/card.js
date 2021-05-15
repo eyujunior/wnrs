@@ -1,4 +1,5 @@
 import { Card, CardContent, makeStyles, Box } from '@material-ui/core'
+import * as Decks from '../decks'
 import {forwardRef} from 'react'
 
 const smallSize = [360, 248]
@@ -69,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
   },
   footer: {
     padding: '0 !important',
-    fontSize: '0.6rem',
+    fontSize: '0.5em',
   },
 }))
 
@@ -78,6 +79,15 @@ export default forwardRef( function WNRSCard(props, ref) {
   const isWildcard = props.content.startsWith('Wild Card')
   const isReminder = props.content.startsWith('Reminder')
   const question = isWildcard ? props.content.slice(10) : isReminder ? props.content.slice(9) : props.content;
+  
+  const getDeckName = (() => {
+    if (props.decks.length === 1) return Decks[props.decks[0]].edition
+    for (let i = 0; i < props.decks.length; i++)
+      if (Decks[props.decks[i]][`level${props.level}`].includes(props.content) || 
+          (Decks[props.decks[i]].finalCard !== undefined && Decks[props.decks[i]].finalCard.includes(props.content)))
+        return Decks[props.decks[i]].edition
+    return ""
+  })()
 
   return (
     <Box className={classes.root} ref={ref}>
@@ -96,7 +106,8 @@ export default forwardRef( function WNRSCard(props, ref) {
         </div>
         </CardContent>
         <CardContent className={classes.footer}>
-          We're Not Really Strangers
+          We're Not Really Strangers <br/>
+          {getDeckName}
         </CardContent>
       </Card>
     </Box>
