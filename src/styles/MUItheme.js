@@ -1,6 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-
-var theme = createMuiTheme({
+var theme = {
     typography: {
         fontFamily: [
             'Helvetica Neue',
@@ -11,7 +9,7 @@ var theme = createMuiTheme({
         ].join(','),
         fontSize: 12,
         h6: { 
-            fontSize: 16,
+            fontSize: 14,
             lineHeight: 1.2,
             fontWeight: 700, 
         },
@@ -25,15 +23,11 @@ var theme = createMuiTheme({
     },
     palette: {
         primary: {
-            light: '#fb4d3f',
             main:  '#c10016',
-            dark:  '#880000',
             contrastText: '#ffffff',
         },
         secondary: {
-            light: '#faf1f0',
             main: '#ee6a67',
-            dark: '#b7393c',
             contrastText: '#eeeeee',
         },
         background: {
@@ -41,7 +35,6 @@ var theme = createMuiTheme({
             paper:   '#f6f6f6',
         }
     },
-
-})
+}
 
 export default theme;

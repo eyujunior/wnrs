@@ -1,22 +1,38 @@
 import { Card, CardContent, makeStyles, Box } from '@material-ui/core'
 import {forwardRef} from 'react'
 
+const smallSize = [360, 248]
+const largeSize = [480, 330]
+
 const useStyles = makeStyles((theme) => ({
   root: {
     position: 'fixed',
     top: '50%',
     left: '50%',
-    marginLeft: -180,
-    marginTop: -115,
+    [theme.breakpoints.down('sm')]: {
+      marginLeft: -smallSize[0]/2,
+      marginTop: -smallSize[1]/2,
+    },
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: -largeSize[0]/2,
+      marginTop: -largeSize[1]/2,
+    },
   },
   card: {
-    width: 360,
-    height: 230,
+    ...theme.typography.h6,
+    [theme.breakpoints.down('sm')]: {
+      width: smallSize[0],
+      height: smallSize[1],
+    },
+    [theme.breakpoints.up('sm')]: {
+      width: largeSize[0],
+      height: largeSize[1],
+      fontSize: largeSize[0]/smallSize[0] * theme.typography.h6.fontSize
+    },
     borderRadius: 60,
     display: 'flex',
     flexDirection: 'column',
     padding: theme.spacing(2),
-    ...theme.typography.h6,
     textTransform: 'uppercase',
     textAlign: 'center',
   },
@@ -65,28 +81,24 @@ export default forwardRef( function WNRSCard(props, ref) {
 
   return (
     <Box className={classes.root} ref={ref}>
-    <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} variant='outlined' aria-label={props.content} style={props.trans}>
-      <CardContent className={classes.content}>
-      {isWildcard 
-        ? <div className={classes.wildCardHeader}>
-            Wild Card
-          </div>
-        : null }
-      <div className={classes.flexRow}>
-        {isReminder
-          ? <div className={classes.reminderHeader}>
-              Reminder
-            </div>
+      <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} variant='outlined' aria-label={props.content} style={props.trans}>
+        <CardContent className={classes.content}>
+        {isWildcard 
+          ? <div className={classes.wildCardHeader}>WildCard</div>
           : null }
-        <span className={isReminder ? classes.reminderContent : null} style={{whiteSpace: 'pre-line'}}>
-          {question}
-        </span>
-      </div>
-      </CardContent>
-      <CardContent className={classes.footer}>
-        We're Not Really Strangers
-      </CardContent>
-    </Card>
+        <div className={classes.flexRow}>
+          {isReminder
+            ? <div className={classes.reminderHeader}>Reminder</div>
+            : null }
+          <span className={isReminder ? classes.reminderContent : null} style={{whiteSpace: 'pre-line'}}>
+            {question}
+          </span>
+        </div>
+        </CardContent>
+        <CardContent className={classes.footer}>
+          We're Not Really Strangers
+        </CardContent>
+      </Card>
     </Box>
   )
 })

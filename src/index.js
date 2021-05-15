@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import ThemeApp from './ThemeApp';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+      <ThemeApp />
   </React.StrictMode>,
   document.getElementById('root')
 );

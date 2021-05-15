@@ -1,4 +1,15 @@
-export const levelOne = [
+export const name = "Main Card Game"
+export const menu = "Main"
+export const edition = "Main Deck"
+export const suggestedPlayer = "2-6 players"
+export const color = {
+  main:  '#c10016',
+  contrastText: '#ffffff',
+}
+export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Reflection', 'Final Card']
+export const isExpansion = true
+
+export const level1 = [
   "What was your first impression of me?",
   "What do you think is the hardest part of what I do for a living?",
   "What reality show do you think I'm most likely to binge watch? Explain.",
@@ -45,13 +56,13 @@ export const levelOne = [
   "Wild Card Draw a portrait of each other to the bst of your ability. (1 minute) Then exchange.",
   "Wild Card Think of your favorite brand of cereal. On the count of three say your answers out loud! (Both players)",
   "Wild Card Think of your favorite childhood tv show of all time. On the count of three, say it out loud! (Both players)",
-  "Wild Card On a scale of 1-10, rate your dancing skills. On the count of three, say our it out loud! (Both players)",
+  "Wild Card On a scale of 1-10, rate your dancing skills. On the count of three, say it out loud! (Both players)",
   "Wild Card Close your eyes. What color are my eyes?",
   "Wild Card Make an assumption about me. (Both players)",
   "Reminder Let go of your attachment to the outcome.",
 ];
 
-export const levelTwo = [
+export const level2 = [
   "How can you become a better person?",
   "What's your mother's name? And the most beautiful thing about her?",
   "If you could get to know someone in your life on a deeper level, who would it be and why?",
@@ -107,7 +118,7 @@ export const levelTwo = [
   "Reminder Be more interested in understanding others than being understood.",
 ];
 
-export const levelThree = [
+export const level3 = [
   "How would you describe me to a stranger?",
   "What about me surprised you?",
   "What would be the perfect gift for me?",

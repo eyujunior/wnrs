@@ -1,8 +1,7 @@
 import WNRSCard from './components/card'
-import { levelOne, levelTwo, levelThree, finalCard } from './decks/original'
+import * as Decks from './decks'
 import NavBar from './components/navbar'
-import MUItheme from  './styles/MUItheme'
-import { Button, ThemeProvider, makeStyles, CssBaseline, MobileStepper, Slide } from '@material-ui/core'
+import { Button, makeStyles, CssBaseline, MobileStepper, Slide } from '@material-ui/core'
 import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
 import { useEffect, useState } from 'react';
 import { use100vh } from 'react-div-100vh'
@@ -22,7 +21,15 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     color: theme.palette.primary.main,
     width: 380,
-    paddingTop: 400,
+    [theme.breakpoints.down('sm')]: {
+      paddingTop: 400,
+      width: 380,
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: 544,
+      width: 510,
+      fontSize: 14,
+    },
   },
   leftNav: {
     width: '30%',
@@ -38,21 +45,20 @@ const useStyles = makeStyles((theme) => ({
     top: 0,
     right: 0,
   }
-}), {defaultTheme: MUItheme});
+}));
 
-function App() {
+function App(props) {
   const classes = useStyles();
-  const [level, setLevel] = useState('1');
-  const [step, setStep] = useState(0);
-  const [cards, setCards] = useState(null);
+  const [level,     setLevel]     = useState('1');
+  const [step,      setStep]      = useState(0);
+  const [playDecks, setPlayDecks] = useState(null);
+  const [cards,     setCards]     = useState(null);
   const [rotations, setRotations] = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
-  const [transX, setTransX] = useState(Array.from({length: 300}, () => 8 - Math.random() * 16))
-  const [transY, setTransY] = useState(Array.from({length: 300}, () => 8 - Math.random() * 16))
-  //const [showCards, setShowCards] = useState(null)
-
-  var maxSteps = cards == null ? 0 : cards[`lv${level}`].length; 
+  const [transX,    setTransX]    = useState(Array.from({length: 300}, () => 8 - Math.random() * 16))
+  const [transY,    setTransY]    = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
 
   const height = use100vh();
+  var maxSteps = cards == null ? 0 : cards[level-1].length; 
 
   const shuffle = (arr) => {
     let tmp = arr.slice(0);
@@ -63,50 +69,75 @@ function App() {
     return tmp;
   }
 
-  const handleLevelChange = (e) => {
+  const onLevelChange = (e) => {
     setLevel(e.currentTarget.value);
     setStep(0);
   }
 
+  const onDeckChange = (e) => {
+    let deck = e.currentTarget.value;
+    let disableObj = {}
+    Decks[deck].isExpansion
+      ? Object.keys(Decks).forEach(key => { if (!Decks[key].isExpansion) disableObj[key] = false })
+      : Object.keys(Decks).forEach(key => { if (key !== deck) disableObj[key] = false })
+    let newPlayDecks = {...playDecks, [deck]: !playDecks[deck], ...disableObj}
+    let firstTrue = Object.keys(newPlayDecks).find(i => newPlayDecks[i]) 
+    if (firstTrue === undefined) {
+      newPlayDecks.main = true;
+      firstTrue = 'main';
+    }
+    setPlayDecks(newPlayDecks)
+    setLevel('1');
+    setStep(0);
+    props.changeColor(Decks[firstTrue].color)
+  }
+
   const handleNext = () => {
-    //setShowCards({...showCards, [`lv${level}`]: showCards[`lv${level}`].fill(!showCards[`lv${level}`][step], step, step+1)});
-    //setShowCards({...showCards, [`lv${level}`]: showCards[`lv${level}`].fill(!showCards[`lv${level}`][step+1], step+1, step+2)});
-    if (step === cards[`lv${level}`].length-1) return;
+    if (step === cards[level-1].length-1) return;
     setStep(step + 1);
   }
 
   const handleBack = () => {
-    //setShowCards({...showCards, [`lv${level}`]: !showCards[`lv${level}`][step]});
-    //setShowCards({...showCards, [`lv${level}`]: !showCards[`lv${level}`][step-1]});
     if (step === 0) return;
     setStep(step - 1);    
   }
   
   useEffect(() => {
-    setCards({
-      lv1: shuffle(levelOne),
-      lv2: shuffle(levelTwo),
-      lv3: shuffle(levelThree),
-      lv4: finalCard,
-    })
-    /*setRotations({
-      lv1: Array.from({length: levelOne.length}, () => 15 - Math.random() * 30),
-      lv2: Array.from({length: levelTwo.length}, () => 15 - Math.random() * 30),
-      lv3: Array.from({length: levelThree.length}, () => 15 - Math.random() * 30),
-    })*/
+    let startingDeck = {};
+    Object.keys(Decks).forEach(key => startingDeck[key] = false);
+    startingDeck.main = true;
+    setPlayDecks(startingDeck);
   }, [])
+
+  useEffect(() => {
+    if (playDecks == null) return;
+    let playCards = []
+    let levels = Decks[Object.keys(playDecks).find(i => playDecks[i])].levels
+    for (let i = 0; i < levels.length; i++) {
+      let cards = []
+      Object.keys(playDecks).forEach(key => { if (playDecks[key]) {
+        let currLevel = Decks[key][`level${i+1}`]
+        let finalCard = Decks[key].finalCard
+        if (currLevel !== undefined) cards = cards.concat(currLevel)
+        else if (finalCard !== undefined) cards = finalCard
+      }})
+      playCards.push(shuffle(cards))
+    }
+    setCards(playCards)
+  }, [playDecks])
 
   if (cards === null) return <div/>
   return (
-    <ThemeProvider theme={MUItheme}>
+    <>
       <CssBaseline/>
-      <NavBar level={level} handleLevelChange={handleLevelChange}/>
+      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange}/>
       <div onClick={handleBack} style={{height: height}} className={classes.leftNav}/>
       <div onClick={handleNext} style={{height: height}} className={classes.rightNav}/>
       <div className={classes.root} style={{height: height}}>
-        {cards[`lv${level}`].map((card, idx) => 
-          <Slide direction="down" in={idx <= step} mountOnEnter unmountOnExit>
-            <WNRSCard content={card} className={classes.card} key={`Card${idx}`} trans={{transform: `rotate(${rotations[idx]}deg) translateX(${transX[idx]}px) translateY(${transY[idx]}px)`}}/>
+        {cards[level-1].map((card, idx) => 
+          <Slide direction="down" in={idx <= step} mountOnEnter unmountOnExit key={`Card${idx}`}>
+            <WNRSCard content={card} className={classes.card}  
+              trans={{transform: `rotate(${rotations[idx]}deg) translateX(${transX[idx]}px) translateY(${transY[idx]}px)`}}/>
           </Slide>
         )}
         <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={step} className={classes.stepper}
@@ -120,7 +151,7 @@ function App() {
             </Button> }
         />
       </div>
-    </ThemeProvider>
+    </>
   );
 }
 
