@@ -4,6 +4,7 @@ import NavBar from './components/navbar'
 import { makeStyles, CssBaseline, MobileStepper, Slide, Backdrop } from '@material-ui/core'
 import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded, ArrowUpwardRounded } from '@material-ui/icons'
 import { useEffect, useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { use100vh } from 'react-div-100vh'
 
 const hexToRgb = (hex) => {
@@ -16,6 +17,9 @@ const hexToRgb = (hex) => {
 }
 
 const useStyles = makeStyles((theme) => ({
+  safeArea: {
+    color: theme.palette.primary.main,
+  },
   root: {
     width: '100%',
     display: 'flex',
@@ -214,7 +218,7 @@ function App(props) {
 
   if (cards === null) return <div/>
   return (
-    <>
+    <SafeAreaView edges={['top']} className={classes.safeArea}>
       <CssBaseline/>
       <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange} handleToggleControl={() => setControlPanel(0)}/>
       <div onClick={handleBack} style={{height: height}} className={`${classes.nav} ${classes.leftNav}`}/>
@@ -230,15 +234,15 @@ function App(props) {
         )}
         <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={step} className={classes.stepper}/>
       </div>
-      <Backdrop className={classes.backdrop} open={openWelcome} onClick={handleToggleWelcome}>
+      <Backdrop className={classes.backdrop} open={openWelcome} onClick={handleToggleWelcome} mountOnEnter unmountOnExit>
         <div className={classes.backdropContent} style={{maxWidth: 500}}>
-          <p>We're not really strangers</p>
+          <p><u>We're not really strangers</u></p>
           <p>Warning:<br/>Feelings may arise.</p>
           <p>Ready?</p>
-          <p className={classes.subtitle}>Reminder: Open your heart.<br/> Add this application to your home page<br/> to begin a conversation with anyone anytime.</p>
+          <p className={classes.subtitle}>Reminder: Open your heart.<br/><br/>Add this application to your home page<br/> to begin a conversation with anyone anytime.</p>
         </div>
       </Backdrop>
-      <Backdrop className={`${classes.backdrop} ${classes.opacity}`} open={controlPanel < 3} onClick={handleToggleControl} >
+      <Backdrop className={`${classes.backdrop} ${classes.opacity}`} open={controlPanel < 3} onClick={handleToggleControl} mountOnEnter unmountOnExit>
         {controlPanel === 0
           ? <div className={classes.backdropContent}>
               <p style={{textAlign: 'left'}}>Click on left side<br/>of the screen<br/>for the previous card.</p>
@@ -258,7 +262,7 @@ function App(props) {
             </div>
           : null} 
       </Backdrop>
-    </>
+    </SafeAreaView>
   );
 }
 

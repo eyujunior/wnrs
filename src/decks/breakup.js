@@ -13,7 +13,7 @@ export const backDesc = [
     "The end of a relationship\n is the beginning of a new\n one... with yourself"
 ]
 
-export const level1 = [ // 47 / 51 cards
+export const level1 = [ // 46 / 50 cards
     "What has helped you\n heal from a heartbreak\n in the past, besides time and\n meeting someone new?",
     "After your most recent\n breakup, what song did you\n play on repeat?",
     "Picture you're talking to\n your ex. Finish the sentence:\n You hurt me, but thank\n you for ______.",

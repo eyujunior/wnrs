@@ -133,7 +133,7 @@ export default function NavBar(props) {
               <IconButton onClick={() => handleToggle(key)} className={classes.infoButton}>
                 <InfoRounded />
               </IconButton>
-              <Backdrop className={classes.backdrop} open={open[key]} onClick={() => handleToggle(key)}>
+              <Backdrop className={classes.backdrop} open={open[key]} onClick={() => handleToggle(key)} mountOnEnter unmountOnExit>
                 <div className={classes.info}>
                   <p><u>{availDecks[key].name}</u></p>
                   <Divider variant='middle'/>
@@ -152,7 +152,7 @@ export default function NavBar(props) {
         <IconButton onClick={handleToggleHelp}>
           <HelpOutlineRounded className={classes.linkButton}/>
         </IconButton>
-        <Backdrop className={classes.backdrop} open={openHelp} onClick={handleToggleHelp}>
+        <Backdrop className={classes.backdrop} open={openHelp} onClick={handleToggleHelp} mountOnEnter unmountOnExit>
           <div className={classes.info}>
             <p><u>How to Play</u></p>
             <p>Pick a card. Read it out loud to your partner(s) and listen to their answer.</p>
@@ -177,7 +177,8 @@ export default function NavBar(props) {
               <IconButton className={classes.linkButton} onClick={onGithub} ><GitHub/></IconButton>
               <IconButton className={classes.linkButton} onClick={props.handleToggleControl}><VideogameAssetRounded /></IconButton>
             </div>
-            <span className={classes.subtitle}>© We're Not Really Strangers<br/>Developed by jonathan-lph</span>
+            <div className={`${classes.row} ${classes.subtitle}`}>© We're Not Really Strangers<br/>Developed by jonathan-lph</div>
+            <div className={classes.subtitle}>Please contact through Github if you have purchased<br/> some expansions that is not included here and<br/> would like to let more people play WNRS for free.</div>
           </div>
         </Backdrop>
       </Toolbar>
