@@ -13,8 +13,6 @@
     "react": "^17.0.2",
     "react-div-100vh": "^0.6.0",
     "react-dom": "^17.0.2",
-    "react-native": "^0.64.1",
-    "react-native-safe-area-context": "^3.2.0",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.1.2"
   },

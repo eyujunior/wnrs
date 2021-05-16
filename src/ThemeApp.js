@@ -1,5 +1,4 @@
 import baseTheme from  './styles/MUItheme'
-import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core'
 import { useState } from 'react';
 import App from './App'
@@ -18,11 +17,9 @@ function ThemeApp() {
   }
   
   return (
-    <SafeAreaProvider>
       <ThemeProvider theme={MUITheme}>
         <App changeColor={changeColor}/>
       </ThemeProvider>
-    </SafeAreaProvider>
   );
 }
 

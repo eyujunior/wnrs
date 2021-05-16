@@ -4,7 +4,6 @@ import NavBar from './components/navbar'
 import { makeStyles, CssBaseline, MobileStepper, Slide, Backdrop } from '@material-ui/core'
 import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded, ArrowUpwardRounded } from '@material-ui/icons'
 import { useEffect, useState } from 'react';
-import { SafeAreaView } from 'react-native-safe-area-context';
 import { use100vh } from 'react-div-100vh'
 
 const hexToRgb = (hex) => {
@@ -17,9 +16,6 @@ const hexToRgb = (hex) => {
 }
 
 const useStyles = makeStyles((theme) => ({
-  safeArea: {
-    color: theme.palette.primary.main,
-  },
   root: {
     width: '100%',
     display: 'flex',
@@ -218,7 +214,7 @@ function App(props) {
 
   if (cards === null) return <div/>
   return (
-    <SafeAreaView edges={['top']} className={classes.safeArea}>
+    <>
       <CssBaseline/>
       <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange} handleToggleControl={() => setControlPanel(0)}/>
       <div onClick={handleBack} style={{height: height}} className={`${classes.nav} ${classes.leftNav}`}/>
@@ -262,7 +258,7 @@ function App(props) {
             </div>
           : null} 
       </Backdrop>
-    </SafeAreaView>
+    </>
   );
 }
 
