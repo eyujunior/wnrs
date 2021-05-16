@@ -7,6 +7,7 @@ const availDecks = require('../decks')
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
+    paddingTop: 'env(safe-area-inset-top)',
     zIndex: '40',
   },
   option: {
