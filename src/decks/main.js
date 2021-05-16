@@ -10,7 +10,7 @@ export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Refl
 export const isExpansion = true
 
 export const backDesc = [
-  "Come curious | Leave connected"
+  "What's more romantic\n than being understood?"
 ]
 
 export const instruction = [
@@ -88,7 +88,7 @@ export const level2 = [
   "What lesson took you the longest to unlearn?",
   "If you have, when was the moment you realized you weren't invincible?",
   "Do you think the image you have of yourself matches the image people see you as?",
-  "If you could have it your way: Who would you be with? Where would you be? And what would you be doing?",
+  "If you could have it your\n way: Who would you be\n with? Where would you\n be? And what would you be\n doing?",
   "Is there a feeling you miss?",
   "What's been your happiest memory this past year?",
   "When was the last time you surprised yourself?",

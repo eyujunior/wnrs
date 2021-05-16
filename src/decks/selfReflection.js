@@ -10,7 +10,8 @@ export const levels = ["Self-reflection"]
 export const isExpansion = false
 
 export const backDesc = [
-    "Nice to meet you"
+    "Nice to meet you",
+    "Self awareness starts\n with self-reflection"
 ]
 
 export const level1 = [ // 52 cards

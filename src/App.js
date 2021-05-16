@@ -104,7 +104,6 @@ function App(props) {
   const [controlPanel, setControlPanel] = useState(99);
   const [openWelcome, setOpenWelcome] = useState(true);
 
-
   const height = use100vh();
   var maxSteps = cards == null ? 0 : cards[level-1].length; 
 
@@ -171,15 +170,15 @@ function App(props) {
   }
 
   useEffect(() => {
+    initDeck()
+  }, [])
+
+  useEffect(() => {
     if (controlPanel === 0){
       initDeck()
       setLevel('1')
     }
   }, [controlPanel])
-
-  useEffect(() => {
-    initDeck()
-  }, [])
 
   useEffect(() => {
     if (playDecks == null) return;
@@ -205,8 +204,8 @@ function App(props) {
       <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange} handleToggleControl={() => setControlPanel(0)}/>
       <div onClick={handleBack} style={{height: height}} className={`${classes.nav} ${classes.leftNav}`}/>
       <div onClick={handleNext} style={{height: height}} className={`${classes.nav} ${classes.rightNav}`}/>
-      <KeyboardArrowLeftRounded className={`${classes.arrow} ${classes.leftArrow}`}/>
-      <KeyboardArrowRightRounded className={`${classes.arrow} ${classes.rightArrow}`}/>
+      <KeyboardArrowLeftRounded className={`${classes.arrow} ${classes.leftArrow}`} style={step === 0 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
+      <KeyboardArrowRightRounded className={`${classes.arrow} ${classes.rightArrow}`} style={step === cards[level-1].length-1 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
       <div className={classes.root} style={{height: height}}>
         {cards[level-1].map((card, idx) => 
           <Slide direction="down" in={idx <= step} mountOnEnter unmountOnExit key={`Card${idx}`}>

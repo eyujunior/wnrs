@@ -178,9 +178,6 @@ export default function NavBar(props) {
             <span className={classes.subtitle}>© We're Not Really Strangers<br/>Developed by jonathan-lph</span>
           </div>
         </Backdrop>
-        
-
-
       </Toolbar>
     </AppBar>
   )
