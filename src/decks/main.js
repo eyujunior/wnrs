@@ -9,6 +9,16 @@ export const color = {
 export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Reflection', 'Final Card']
 export const isExpansion = true
 
+export const backDesc = [
+  "Come curious | Leave connected"
+]
+
+export const instruction = [
+  "Do you really know your best friend? How well do you know your mother, or sister, or anyone else close to you?",
+  "WNRS is a purpose driven card game. 3 carefully crafted levels that allow you to deepen your existing relationships and create new ones.",
+  "Ready?"
+]
+
 export const level1 = [
   "What was your first impression of me?",
   "What do you think is the hardest part of what I do for a living?",

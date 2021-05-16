@@ -3,6 +3,6 @@ module.exports = {
     honestDating: require('./honestDating'),
     relationship: require('./relationship'),
     breakup: require('./breakup'),
-    raceAndPrivilege: require('./raceAndPrivilege'),
     selfReflection: require('./selfReflection'),
+    raceAndPrivilege: require('./raceAndPrivilege'),
 }

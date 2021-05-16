@@ -83,7 +83,7 @@ export default forwardRef( function WNRSCard(props, ref) {
   const getDeckName = (() => {
     if (props.decks.length === 1) return Decks[props.decks[0]].edition
     for (let i = 0; i < props.decks.length; i++)
-      if (Decks[props.decks[i]][`level${props.level}`].includes(props.content) || 
+      if ((Decks[props.decks[i]][`level${props.level}`]!== undefined && Decks[props.decks[i]][`level${props.level}`].includes(props.content)) || 
           (Decks[props.decks[i]].finalCard !== undefined && Decks[props.decks[i]].finalCard.includes(props.content)))
         return Decks[props.decks[i]].edition
     return ""
@@ -91,7 +91,8 @@ export default forwardRef( function WNRSCard(props, ref) {
 
   return (
     <Box className={classes.root} ref={ref}>
-      <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} variant='outlined' aria-label={props.content} style={props.trans}>
+      <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} 
+        variant='outlined' aria-label={props.content} style={props.trans}>
         <CardContent className={classes.content}>
         {isWildcard 
           ? <div className={classes.wildCardHeader}>WildCard</div>

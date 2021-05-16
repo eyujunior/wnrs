@@ -1,7 +1,7 @@
 export const name = "Relationship Expansion Pack"
 export const menu = "Relationship"
 export const edition = "Relationship Expansion Pack"
-export const suggestedPlayer = "2 player"
+export const suggestedPlayer = "2 players"
 export const color = {
     main:  '#c10016',
     contrastText: '#ffffff',

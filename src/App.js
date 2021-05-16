@@ -1,8 +1,8 @@
 import WNRSCard from './components/card'
 import * as Decks from './decks'
 import NavBar from './components/navbar'
-import { Button, makeStyles, CssBaseline, MobileStepper, Slide } from '@material-ui/core'
-import { KeyboardArrowLeft, KeyboardArrowRight } from '@material-ui/icons'
+import { makeStyles, CssBaseline, MobileStepper, Slide, Backdrop } from '@material-ui/core'
+import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded, ArrowUpwardRounded } from '@material-ui/icons'
 import { useEffect, useState } from 'react';
 import { use100vh } from 'react-div-100vh'
 
@@ -21,7 +21,8 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     color: theme.palette.primary.main,
     width: 380,
-    [theme.breakpoints.down('sm')]: {
+    justifyContent: 'center',
+    [theme.breakpoints.down('xs')]: {
       paddingTop: 400,
       width: 380,
     },
@@ -31,19 +32,63 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 14,
     },
   },
-  leftNav: {
+  nav: {
     width: '30%',
     zIndex: '20',
     position: 'fixed',
     top: 0,
-    left: 0,
   },
-  rightNav: {
-    width: '30%',
-    zIndex: '20',
+  leftNav:  { left:  0 },
+  rightNav: { right: 0 },
+  arrow: {
+    [theme.breakpoints.down('xs')]: {
+      visibility: 'hidden',
+    },
     position: 'fixed',
-    top: 0,
-    right: 0,
+    top: '50%',
+    fontSize: 60,
+    margin: '0 0 -30 -30',
+    color: theme.palette.primary.light,
+  },
+  leftArrow: {left: '1%' },
+  rightArrow: {right: '1%'},
+  backdrop: {
+    zIndex: theme.zIndex.drawer + 1,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    paddingTop: theme.spacing(2),
+  },
+  backdropContent:{
+    display: 'flex',
+    flexDirection: 'column',
+    ...theme.typography.h6,
+    whiteSpace: 'pre-line',
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    width: '80%',
+  },
+  level: {
+    paddingTop: theme.spacing(2),
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    position: 'fixed',
+    width: 'auto',
+    [theme.breakpoints.down('xs')]: { paddingTop: 56, right: 103 },
+    [theme.breakpoints.up('sm')]:   { paddingTop: 64, right: 111 },
+  },
+  decks: {
+    paddingTop: theme.spacing(2),
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    position: 'fixed',
+    width: 'auto',
+    [theme.breakpoints.down('xs')]: { paddingTop: 56, right: 13 },
+    [theme.breakpoints.up('sm')]:   { paddingTop: 64, right: 21 },
+  },
+  subtitle: {
+    fontWeight: 400,
+    textTransform: 'none',
+    fontSize: '0.8em'
   }
 }));
 
@@ -53,9 +98,12 @@ function App(props) {
   const [step,      setStep]      = useState(0);
   const [playDecks, setPlayDecks] = useState(null);
   const [cards,     setCards]     = useState(null);
-  const [rotations, setRotations] = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
-  const [transX,    setTransX]    = useState(Array.from({length: 300}, () => 8 - Math.random() * 16))
-  const [transY,    setTransY]    = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
+  const [rotations]               = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
+  const [transX]                  = useState(Array.from({length: 300}, () => 8 - Math.random() * 16))
+  const [transY]                  = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
+  const [controlPanel, setControlPanel] = useState(99);
+  const [openWelcome, setOpenWelcome] = useState(true);
+
 
   const height = use100vh();
   var maxSteps = cards == null ? 0 : cards[level-1].length; 
@@ -111,12 +159,26 @@ function App(props) {
     if (step === 0) return;
     setStep(step - 1);    
   }
-  
-  useEffect(() => {
+
+  const handleToggleWelcome = () => {setOpenWelcome(!openWelcome); setControlPanel(0);}
+  const handleToggleControl = () => setControlPanel(controlPanel+1);
+
+  const initDeck = () => {
     let startingDeck = {};
     Object.keys(Decks).forEach(key => startingDeck[key] = false);
     startingDeck.main = true;
     setPlayDecks(startingDeck);
+  }
+
+  useEffect(() => {
+    if (controlPanel === 0){
+      initDeck()
+      setLevel('1')
+    }
+  }, [controlPanel])
+
+  useEffect(() => {
+    initDeck()
   }, [])
 
   useEffect(() => {
@@ -140,9 +202,11 @@ function App(props) {
   return (
     <>
       <CssBaseline/>
-      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange}/>
-      <div onClick={handleBack} style={{height: height}} className={classes.leftNav}/>
-      <div onClick={handleNext} style={{height: height}} className={classes.rightNav}/>
+      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange} handleToggleControl={() => setControlPanel(0)}/>
+      <div onClick={handleBack} style={{height: height}} className={`${classes.nav} ${classes.leftNav}`}/>
+      <div onClick={handleNext} style={{height: height}} className={`${classes.nav} ${classes.rightNav}`}/>
+      <KeyboardArrowLeftRounded className={`${classes.arrow} ${classes.leftArrow}`}/>
+      <KeyboardArrowRightRounded className={`${classes.arrow} ${classes.rightArrow}`}/>
       <div className={classes.root} style={{height: height}}>
         {cards[level-1].map((card, idx) => 
           <Slide direction="down" in={idx <= step} mountOnEnter unmountOnExit key={`Card${idx}`}>
@@ -150,17 +214,36 @@ function App(props) {
               trans={{transform: `rotate(${rotations[idx]}deg) translateX(${transX[idx]}px) translateY(${transY[idx]}px)`}}/>
           </Slide>
         )}
-        <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={step} className={classes.stepper}
-          nextButton={
-            <Button size="small" onClick={handleNext} color='primary' disabled={step === maxSteps - 1}>
-              <KeyboardArrowRight />
-            </Button> }
-          backButton={
-            <Button size="small" onClick={handleBack} color='primary' disabled={step === 0}>
-              <KeyboardArrowLeft />
-            </Button> }
-        />
+        <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={step} className={classes.stepper}/>
       </div>
+      <Backdrop className={classes.backdrop} open={openWelcome} onClick={handleToggleWelcome}>
+        <div className={classes.backdropContent} style={{maxWidth: 500}}>
+          <p>We're not really strangers</p>
+          <p>Warning:<br/>Feelings may arise.</p>
+          <p>Ready?</p>
+          <p className={classes.subtitle}>Reminder: Open your heart.<br/> Add this application to your home page<br/> to begin a conversation with anyone anytime.</p>
+        </div>
+      </Backdrop>
+      <Backdrop className={classes.backdrop} open={controlPanel < 3} onClick={handleToggleControl} style={{opacity: 0.7}}>
+        {controlPanel === 0
+          ? <div className={classes.backdropContent}>
+              <p style={{textAlign: 'left'}}>Click on left side<br/>of the screen<br/>for the previous card.</p>
+              <p style={{textAlign: 'right'}}>Click on right side<br/>of the screen<br/>for the next card.</p>
+            </div>
+          : null }
+        {controlPanel === 1
+          ? <div className={`${classes.backdropContent} ${classes.level}`}>
+              <ArrowUpwardRounded/>
+              <p style={{width: 180}}>Whenever you feel comfortable, change level here.</p>
+            </div>
+          : null}
+        {controlPanel === 2
+          ? <div className={`${classes.backdropContent} ${classes.decks}`}>
+              <ArrowUpwardRounded/>
+              <p style={{width: 180}}>Change deck here. Some decks are best used when added to the original WNRS card game.</p>
+            </div>
+          : null} 
+      </Backdrop>
     </>
   );
 }
