@@ -40,6 +40,8 @@ const useStyles = makeStyles((theme) => ({
   infoButton: {
     color: theme.palette.primary.light,
     marginRight: -10,
+    marginLeft: theme.spacing(0.5),
+    padding: theme.spacing(0.8),
   },
   paragraph: {
     textAlign: 'left',

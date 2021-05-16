@@ -6,6 +6,15 @@ import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded, ArrowUpwardRounded
 import { useEffect, useState } from 'react';
 import { use100vh } from 'react-div-100vh'
 
+const hexToRgb = (hex) => {
+  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
@@ -89,6 +98,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     textTransform: 'none',
     fontSize: '0.8em'
+  },
+  opacity: {
+    backgroundColor: (() => {
+      let rgb = hexToRgb(theme.palette.primary.main);
+      return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.85)`
+    })(),
   }
 }));
 
@@ -223,7 +238,7 @@ function App(props) {
           <p className={classes.subtitle}>Reminder: Open your heart.<br/> Add this application to your home page<br/> to begin a conversation with anyone anytime.</p>
         </div>
       </Backdrop>
-      <Backdrop className={classes.backdrop} open={controlPanel < 3} onClick={handleToggleControl} style={{opacity: 0.7}}>
+      <Backdrop className={`${classes.backdrop} ${classes.opacity}`} open={controlPanel < 3} onClick={handleToggleControl} >
         {controlPanel === 0
           ? <div className={classes.backdropContent}>
               <p style={{textAlign: 'left'}}>Click on left side<br/>of the screen<br/>for the previous card.</p>
@@ -236,7 +251,7 @@ function App(props) {
               <p style={{width: 180}}>Whenever you feel comfortable, change level here.</p>
             </div>
           : null}
-        {controlPanel === 2
+        {controlPanel === 2 || controlPanel === 3
           ? <div className={`${classes.backdropContent} ${classes.decks}`}>
               <ArrowUpwardRounded/>
               <p style={{width: 180}}>Change deck here. Some decks are best used when added to the original WNRS card game.</p>
