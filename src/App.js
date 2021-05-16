@@ -83,8 +83,8 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'flex-start',
     position: 'fixed',
     width: 'auto',
-    [theme.breakpoints.down('xs')]: { paddingTop: 56, right: 103 },
-    [theme.breakpoints.up('sm')]:   { paddingTop: 64, right: 111 },
+    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 103 },
+    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 0px))', right: 111 },
   },
   decks: {
     paddingTop: theme.spacing(2),
@@ -92,8 +92,8 @@ const useStyles = makeStyles((theme) => ({
     alignSelf: 'flex-start',
     position: 'fixed',
     width: 'auto',
-    [theme.breakpoints.down('xs')]: { paddingTop: 56, right: 13 },
-    [theme.breakpoints.up('sm')]:   { paddingTop: 64, right: 21 },
+    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 13 },
+    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 64px))', right: 21 },
   },
   subtitle: {
     fontWeight: 400,
