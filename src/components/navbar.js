@@ -2,6 +2,7 @@ import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconBu
 import { InfoRounded, HelpOutlineRounded, GitHub, HomeRounded, VideogameAssetRounded } from '@material-ui/icons';
 import { useEffect, useState } from 'react'
 import * as gameplay from '../decks/instruction'
+import * as metadata from '../components/metadata'
 
 const availDecks = require('../decks')
 
@@ -53,6 +54,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 0,
     fontWeight: 400,
     textTransform: 'none',
+    whiteSpace: 'pre-line',
     fontSize: '0.8em'
   },
   infoLevel: {
@@ -178,8 +180,11 @@ export default function NavBar(props) {
               <IconButton className={classes.linkButton} onClick={onGithub} ><GitHub/></IconButton>
               <IconButton className={classes.linkButton} onClick={props.handleToggleControl}><VideogameAssetRounded /></IconButton>
             </div>
-            <div className={`${classes.row} ${classes.subtitle}`}>© We're Not Really Strangers<br/>Developed by jonathan-lph</div>
-            <div className={classes.subtitle}>Please contact through Github if you have purchased<br/> some expansions that is not included here and<br/> would like to let more people play WNRS for free.</div>
+            <div className={`${classes.row} ${classes.subtitle}`}>
+              {metadata.copyright}s<br/>
+              Developed by {metadata.developer} - {metadata.version}
+            </div>
+            <div className={classes.subtitle}>{metadata.contact}</div>
           </div>
         </Backdrop>
       </Toolbar>
