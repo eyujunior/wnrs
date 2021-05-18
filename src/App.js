@@ -5,7 +5,6 @@ import { makeStyles, CssBaseline, MobileStepper, Slide, Backdrop } from '@materi
 import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded, ArrowUpwardRounded } from '@material-ui/icons'
 import { useEffect, useState } from 'react';
 import { use100vh } from 'react-div-100vh'
-import './App.css'
 
 const hexToRgb = (hex) => {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);

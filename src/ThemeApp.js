@@ -1,5 +1,5 @@
 import baseTheme from  './styles/MUItheme'
-import { ThemeProvider, createMuiTheme } from '@material-ui/core'
+import { ThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core'
 import { useState } from 'react';
 import App from './App'
 
@@ -18,6 +18,7 @@ function ThemeApp() {
   
   return (
       <ThemeProvider theme={MUITheme}>
+        <CssBaseline/>
         <App changeColor={changeColor}/>
       </ThemeProvider>
   );
