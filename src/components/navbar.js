@@ -3,8 +3,7 @@ import { InfoRounded, HelpOutlineRounded, GitHub, HomeRounded, VideogameAssetRou
 import { useEffect, useState } from 'react'
 import * as gameplay from '../decks/instruction'
 import * as metadata from '../components/metadata'
-
-const availDecks = require('../decks')
+import * as Decks from '../decks'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -23,6 +22,9 @@ const useStyles = makeStyles((theme) => ({
   },
   levelMenu: {
     width: 200,
+  },
+  deckMenu:{
+    maxHeight: '80vh',
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
@@ -81,7 +83,7 @@ export default function NavBar(props) {
   const [deckAnchorEl, setDeckAnchorEl] = useState(null);
   const [levelAnchorEl, setLevelAnchorEl] = useState(null);
 
-  const levels = availDecks[Object.keys(props.playDecks).find(i => props.playDecks[i])].levels
+  const levels = Decks[Object.keys(props.playDecks).find(i => props.playDecks[i])].levels
 
   const handleLevelClick = (event) => setLevelAnchorEl(event.currentTarget);
   const handleLevelClose = () => setLevelAnchorEl(null);
@@ -98,7 +100,7 @@ export default function NavBar(props) {
 
   useEffect(() => {
     let obj = {};
-    Object.keys(availDecks).forEach(key => obj[key] = false);
+    Object.keys(Decks).forEach(key => obj[key] = false);
     setOpen(obj);
   }, [])
 
@@ -125,26 +127,26 @@ export default function NavBar(props) {
         </Menu>
 
         <Button className={classes.option} variant='outlined' onClick={handleDeckClick}>Deck</Button>
-        <Menu anchorEl={deckAnchorEl} keepMounted open={Boolean(deckAnchorEl)} onClose={handleDeckClose}>
-          {Object.keys(availDecks).map((key, idx) => 
+        <Menu anchorEl={deckAnchorEl} keepMounted open={Boolean(deckAnchorEl)} onClose={handleDeckClose} classes={{paper: classes.deckMenu}}>
+          {Object.keys(Decks).map((key, idx) => 
             <MenuItem key={`deck-${idx}`}>
               <Button value={key} className={classes.button} color='primary'
                 variant={props.playDecks[key] ? 'contained' : 'outlined'} 
                 onClick={props.onDeckChange}>
-                {availDecks[key].menu}
+                {Decks[key].menu}
               </Button>
               <IconButton onClick={() => handleToggle(key)} className={classes.infoButton}>
                 <InfoRounded />
               </IconButton>
               <Backdrop className={classes.backdrop} open={open[key]} onClick={() => handleToggle(key)} mountOnEnter unmountOnExit>
                 <div className={classes.info}>
-                  <p><u>{availDecks[key].name}</u></p>
+                  <p><u>{Decks[key].name}</u></p>
                   <Divider variant='middle'/>
-                  <p>{availDecks[key].backDesc !== undefined ? availDecks[key].backDesc.join('\n\n') : null}</p>
-                  <p className={classes.subtitle}>For: {availDecks[key].suggestedPlayer}</p>
+                  <p>{Decks[key].backDesc !== undefined ? Decks[key].backDesc.join('\n\n') : Decks[key].menu}</p>
+                  <p className={classes.subtitle}>For: {Decks[key].suggestedPlayer}</p>
                   <Divider variant='middle'/>
-                  {availDecks[key].instruction !== undefined 
-                    ? <p className={classes.paragraph}>{availDecks[key].instruction.join('\n\n')}</p>
+                  {Decks[key].instruction !== undefined 
+                    ? <p className={classes.paragraph}>{Decks[key].instruction.join('\n\n')}</p>
                     : null}
                 </div>
               </Backdrop>
