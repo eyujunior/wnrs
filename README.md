@@ -1,6 +1,6 @@
 # Web-based We're Not Really Strangers
 
-No ads. No non-sense. Just [a free-to-all platform](https://jonathan-lph.github.io/wnrs) to all people who will enjoy We're Not Really Strangers.
+No ads. No profits. No downloads. Just [a free-to-all platform](https://jonathan-lph.github.io/wnrs) to all people who will enjoy We're Not Really Strangers.
 
 ### Available Decks
 
