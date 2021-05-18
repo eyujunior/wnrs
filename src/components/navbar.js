@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
   },
   deckMenu:{
-    maxHeight: '80vh',
+    maxHeight: '95vh',
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,

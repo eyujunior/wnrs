@@ -10,14 +10,13 @@ export const levels = ["Self-reflection"]
 export const isExpansion = false
 
 export const backDesc = [
-    "Nice to meet you",
     "Self awareness starts\n with self-reflection"
 ]
 
 export const level1 = [ // 52 cards
     "When do I feel most\n helpful to others?",
     "What do I keep doing\n that keeps hurting? Why\n do I keep repeating this\n behavior?",
-    "What did the people who raised\n me teach me about love? What\n lessons do I want to keep? What\n do i want to challenge?",
+    "What did the people who raised\n me teach me about love? What\n lessons do I want to keep? What\n do I want to challenge?",
     "Are any of my\n insecurities hurting\n anyone else by\n accident?",
     "How would I describe my\n relationship with myself\n in one word?",
     "What do I need help\n with currently? Who\n can help me? How can I\n help myself?",
@@ -26,7 +25,7 @@ export const level1 = [ // 52 cards
     "What's the most exciting\n improvement I've been seeing\n in myself recently?",
     "What is an unpopular opinion\n of mine that I hesitate to\n share with others?",
     "When was the last time I\n remember being mean to\n someone? Why did I act\n this way?",
-    "I want to thank\n myself for ______.",
+    "I want to thank\n myself for _________.",
     "Which one of my mistakes\n taught me the most this\n past year? What did it\n teach me?",
     "What purchase has meant\n the most to me recently?\n What is a purchase that I\n could have done without?",
     "What have I accomplished\n recently that would have\n shocked me a year ago?",
@@ -39,7 +38,7 @@ export const level1 = [ // 52 cards
     "What have I outgrown\n recently? What am I\n growing into?",
     "What can I be kinder\n towards myself for\n today?",
     "What have I always\n accepted as true that\n turned out to be false?",
-    "What or who\n do I ahve an unhealthy\n relationship with?",
+    "What or who\n do I have an unhealthy\n relationship with?",
     "In what ways do I want to\n be like the people that raised\n me? What's important for me\n to avoid repeating?",
     "What's become more\n important to me recently\n than ever before?",
     "When was the last\n time I truly enjoyed my\n own company? What\n was I doing?",
@@ -63,7 +62,7 @@ export const level1 = [ // 52 cards
     "Wild Card What is one truth I've\n recently come to terms\n with? (Write it out.)",
     "Wild Card Look in the mirror today\n and give yourself a\n genuine compliment.",
     "Wild Card What do I need to get\n off my chest? (Write it out.)",
-    "Wild Card What is my happiness leve on a\n scale of 1-10? (Write it down and\n date it. Why is it this number?\n What would make it 1\n score highter?)",
+    "Wild Card What is my happiness level on a\n scale of 1-10? (Write it down and\n date it. Why is it this number?\n What would make it 1\n score higher?)",
     "Wild Card What feels impossible today that\n would shock me to accomplish in\n a year? (Write it down and date it/)",
     "Wild Card Take 3 deep breaths\n before answering the\n next question.",
     "Wild Card What do I need to hear\n most right now? (Write it\n out. Place somewhere\n you'll see often.)",

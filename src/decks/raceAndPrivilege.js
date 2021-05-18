@@ -33,7 +33,7 @@ export const level1 = [
 
 export const level2 = [
     "In your day to day life,\n how often do you think about\n race / the color of your own skin?\n Why do you think that is?",
-    "What qualities\n do you associate with\n a good listenr?",
+    "What qualities\n do you associate with\n a good listener?",
     "Has your family ever\n said something you deeply\n disagreed with regarding the\n topic of race / racism? How\n did you respond?",
     "How do you feel about\n cancel culture in regards\n to race / racism? What role\n does it play? How does it\n help? How does it hurt?",
     "On a scale of 1-10 how would\n you rate your current knowledge\n of our nation's history regarding\n slavery and systemic racism? What\n can you do to help raise your\n knowledge by 1 point?",

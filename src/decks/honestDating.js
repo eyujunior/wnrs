@@ -37,7 +37,7 @@ export const level1 = [ // 8 cards
 export const level2 = [ // 31 cards
     "What are you feeling\n a lot lately?",
     "Do you have any\n unconventional opinions\n when it comes to romantic\n relationships?",
-    "I know I really like\n someone when ______.",
+    "I know I really like\n someone when _________.",
     "Has sex ever been a\n deal breaker in your\n past relationships?\n Explain.",
     "When's the last time you\n ghosted someone and why?",
     "What about me intrigued\n you besides my physical\n appearance?",

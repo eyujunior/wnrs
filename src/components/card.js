@@ -62,11 +62,9 @@ const useStyles = makeStyles((theme) => ({
   reminderHeader: {
     textAlign: 'left',
     paddingRight: theme.spacing(3),
-    flex: 1,
   },
   reminderContent: {
     textAlign: 'left',
-    flex: 3
   },
   footer: {
     padding: '0 !important',

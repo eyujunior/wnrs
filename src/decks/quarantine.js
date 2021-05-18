@@ -10,7 +10,7 @@ export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Refl
 export const isExpansion = false
 
 export const backDesc = [
-    "Physically distant | Emotionally Connected"
+    "Physically distant\n Emotionally Connected"
 ]
 
 export const level1 = [
