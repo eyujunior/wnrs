@@ -140,7 +140,7 @@ export default function NavBar(props) {
                 <div className={classes.info}>
                   <p><u>{availDecks[key].name}</u></p>
                   <Divider variant='middle'/>
-                  <p>{availDecks[key].backDesc.join('\n\n')}</p>
+                  <p>{availDecks[key].backDesc !== undefined ? availDecks[key].backDesc.join('\n\n') : null}</p>
                   <p className={classes.subtitle}>For: {availDecks[key].suggestedPlayer}</p>
                   <Divider variant='middle'/>
                   {availDecks[key].instruction !== undefined 

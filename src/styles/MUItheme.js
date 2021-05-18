@@ -37,8 +37,8 @@ var theme = {
             contrastText: '#ffffff',
         },
         secondary: {
-            main: '#ee6a67',
-            contrastText: '#eeeeee',
+            main: '#c10016',
+            contrastText: '#ffffff',
         },
         background: {
             default: '#ffffff',

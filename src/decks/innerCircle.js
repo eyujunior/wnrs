@@ -1,6 +1,7 @@
 export const name = "WNRS x Red Table Talk Edition"
 export const menu = "Inner Circle"
 export const edition = "Inner Circle Expansion Pack"
+export const crossover = "Red Table Talk"
 export const suggestedPlayer = "2+ players"
 export const color = {
     main:  '#c10016',

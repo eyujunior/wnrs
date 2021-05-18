@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
   normCard: {
     backgroundColor: theme.palette.background.paper,
-    color: theme.palette.primary.main,
+    color: theme.palette.secondary.main,
   },
   wildCard: {
     backgroundColor: theme.palette.primary.main,
@@ -80,12 +80,12 @@ export default forwardRef( function WNRSCard(props, ref) {
   const isReminder = props.content.startsWith('Reminder')
   const question = isWildcard ? props.content.slice(10) : isReminder ? props.content.slice(9) : props.content;
   
-  const getDeckName = (() => {
-    if (props.decks.length === 1) return Decks[props.decks[0]].edition
+  const getDeck = (() => {
+    if (props.decks.length === 1) return Decks[props.decks[0]]
     for (let i = 0; i < props.decks.length; i++)
       if ((Decks[props.decks[i]][`level${props.level}`]!== undefined && Decks[props.decks[i]][`level${props.level}`].includes(props.content)) || 
           (Decks[props.decks[i]].finalCard !== undefined && Decks[props.decks[i]].finalCard.includes(props.content)))
-        return Decks[props.decks[i]].edition
+        return Decks[props.decks[i]]
     return ""
   })()
 
@@ -107,8 +107,8 @@ export default forwardRef( function WNRSCard(props, ref) {
         </div>
         </CardContent>
         <CardContent className={classes.footer}>
-          We're Not Really Strangers <br/>
-          {getDeckName}
+          We're Not Really Strangers{getDeck.crossover !== undefined ? `\xa0\xa0 X \xa0\xa0${getDeck.crossover}` : null}<br/>
+          {getDeck.edition !== undefined ? getDeck.edition : null}
         </CardContent>
       </Card>
     </Box>

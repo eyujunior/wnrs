@@ -7,4 +7,7 @@ module.exports = {
     selfReflection: require('./selfReflection'),
     quarantine: require('./quarantine'),
     raceAndPrivilege: require('./raceAndPrivilege'),
+    bumbleDate: require('./bumbleDate'),
+    bumbleBFF: require('./bumbleBFF'),
+    bumbleBizz: require('./bumbleBizz'),
 }
