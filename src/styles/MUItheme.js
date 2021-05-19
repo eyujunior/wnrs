@@ -19,7 +19,7 @@ var theme = {
         ].join(','),
         fontSize: 12,
         h6: { 
-            fontSize: 14,
+            fontSize: 15,
             lineHeight: 1.2,
             fontWeight: 700, 
         },

@@ -19,10 +19,11 @@ No ads. No profits. No downloads. Just [a free-to-all platform](https://jonathan
 
 ### Missing Decks
 
-- Breakup Edition (4 cards missing)
+- Breakup Edition (3 cards missing)
 - Healing Edition
 - Self-love Edition
 - WNRS X DVF Own It Expansion Pack
+- WNRS x Valetino Pack
 
 ### Credits
 
@@ -40,4 +41,9 @@ I do not own any of the resources above. If you suspect this is copyright infrig
 
 ### Contact
 
-Please feel free to contact me if you have purchased some expansions that is not included here and would like to let more people play WNRS for free. For bugs and error, please post a new Issue in Github. For general cases such as suggestions and updates, please send an email to hhkk0720@hotmail.com.
+[Reddit thread](https://www.reddit.com/r/cardgames/comments/nf47ps/were_not_really_strangers_online/?utm_source=share&utm_medium=web2x&context=3)
+
+Please feel free to contact me if you have purchased some expansions that is not included here and would like to let more people play WNRS for free. 
+For bugs and error, please post a new Issue in Github. 
+For general cases such as suggestions and updates, please send an email to hhkk0720@hotmail.com.
+

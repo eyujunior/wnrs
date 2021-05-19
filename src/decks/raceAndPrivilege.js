@@ -50,7 +50,7 @@ export const level2 = [
     "Have you ever been called out\n for saying something insensitive\n regarding race? How did it make\n you feel? Did it change you?\n Why or why not?",
     "How do you define \"privilege\"?\n Articulate what privileges\n you think you have.",
 
-    "Reminder Be open to changing your mind when receiving new information, especially if it makes you uncomfortable.",
+    "Reminder Be open to changing\n your mind when\n receiving new\n information,\n especially if it makes\n you uncomfortable.",
 ]
 
 export const level3 = [

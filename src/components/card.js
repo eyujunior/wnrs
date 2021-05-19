@@ -20,22 +20,27 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   card: {
-    ...theme.typography.h6,
+    
     [theme.breakpoints.down('sm')]: {
       width: smallSize[0],
       height: smallSize[1],
+      padding: theme.spacing(1),
     },
     [theme.breakpoints.up('sm')]: {
       width: largeSize[0],
       height: largeSize[1],
+      padding: theme.spacing(1.5),
       fontSize: largeSize[0]/smallSize[0] * theme.typography.h6.fontSize
     },
-    borderRadius: 60,
-    display: 'flex',
-    flexDirection: 'column',
-    padding: theme.spacing(2),
+    borderRadius: 55,
+    ...theme.typography.h6,
     textTransform: 'uppercase',
     textAlign: 'center',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
+    alignItems: 'center'
   },
   normCard: {
     backgroundColor: theme.palette.background.paper,
@@ -49,7 +54,17 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(2),
   },
   content: {
-    flexGrow: 20,
+    position: 'fixed',
+    [theme.breakpoints.down('sm')]: {
+      top: smallSize[1]/2,
+      left: smallSize[0]/2,
+    },
+    [theme.breakpoints.up('sm')]: {
+      top: largeSize[1]/2,
+      left: largeSize[0]/2,
+    },
+    transform: 'translateX(-50%) translateY(-50%)',
+    width: `calc(100% - ${theme.spacing(4)}px)`,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -61,15 +76,19 @@ const useStyles = makeStyles((theme) => ({
   },
   reminderHeader: {
     textAlign: 'left',
-    paddingRight: theme.spacing(3),
+    paddingRight: theme.spacing(4),
   },
   reminderContent: {
     textAlign: 'left',
   },
   footer: {
-    padding: '0 !important',
-    fontSize: '0.5em',
+    padding: `${theme.spacing(0.5, 0)} !important`,
+    fontSize: '0.6em',
   },
+  footerEdition:{
+    padding: '0 !important',
+    fontSize: '0.45em',   
+  }
 }))
 
 export default forwardRef( function WNRSCard(props, ref) {
@@ -91,21 +110,23 @@ export default forwardRef( function WNRSCard(props, ref) {
     <Box className={classes.root} ref={ref}>
       <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} 
         variant='outlined' aria-label={props.content} style={props.trans}>
-        <CardContent className={classes.content}>
-        {isWildcard 
-          ? <div className={classes.wildCardHeader}>WildCard</div>
-          : null }
-        <div className={classes.flexRow}>
-          {isReminder
-            ? <div className={classes.reminderHeader}>Reminder</div>
+        <div className={classes.content}>
+          {isWildcard 
+            ? <div className={classes.wildCardHeader}>WildCard</div>
             : null }
-          <span className={isReminder ? classes.reminderContent : null} style={{whiteSpace: 'pre-line'}}>
-            {question}
-          </span>
+          <div className={classes.flexRow}>
+            {isReminder
+              ? <div className={classes.reminderHeader}>Reminder</div>
+              : null }
+            <span className={isReminder ? classes.reminderContent : null} style={{whiteSpace: 'pre-line'}}>
+              {question}
+            </span>
+          </div>
         </div>
-        </CardContent>
         <CardContent className={classes.footer}>
           We're Not Really Strangers{getDeck.crossover !== undefined ? `\xa0\xa0 X \xa0\xa0${getDeck.crossover}` : null}<br/>
+        </CardContent>
+        <CardContent className={classes.footerEdition} >
           {getDeck.edition !== undefined ? getDeck.edition : null}
         </CardContent>
       </Card>

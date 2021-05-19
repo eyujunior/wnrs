@@ -1,7 +1,7 @@
 export const name = "WNRS x Valentino"
 export const menu = "Valentino"
 export const crossover = "Valentino"
-export const suggestedPlayer = "2 players"
+export const suggestedPlayer = "2+ players"
 export const color = {
     main:  '#4e1214',
     contrastText: '#ffffff',

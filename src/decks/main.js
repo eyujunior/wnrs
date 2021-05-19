@@ -1,6 +1,5 @@
 export const name = "Main Card Game"
 export const menu = "Main"
-export const edition = "Main Deck"
 export const suggestedPlayer = "2-6 players"
 export const color = {
   main:  '#c10016',

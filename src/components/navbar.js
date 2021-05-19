@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     whiteSpace: 'pre-line',
     textTransform: 'uppercase',
     textAlign: 'center',
-    width: '85%',
+    width: '80%',
     maxWidth: 500,
   },
   infoButton: {
@@ -51,6 +51,8 @@ const useStyles = makeStyles((theme) => ({
   paragraph: {
     textAlign: 'left',
     textTransform: 'none',
+    fontWeight: 400,
+    fontSize: theme.typography.h6.fontSize - 1,
     flexGrow: 5,
   },
   subtitle: {
