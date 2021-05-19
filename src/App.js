@@ -1,7 +1,7 @@
 import WNRSCard from './components/card'
 import * as Decks from './decks'
 import NavBar from './components/navbar'
-import { makeStyles, CssBaseline, MobileStepper, Slide, Backdrop } from '@material-ui/core'
+import { makeStyles, CssBaseline, Slide, Backdrop } from '@material-ui/core'
 import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded, ArrowUpwardRounded } from '@material-ui/icons'
 import { useEffect, useState } from 'react';
 import { use100vh } from 'react-div-100vh'
@@ -28,8 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
   stepper: {
     fontWeight: 700,
+    textTransform: 'uppercase',
     color: theme.palette.primary.main,
     width: 380,
+    display: 'flex',
     justifyContent: 'center',
     [theme.breakpoints.down('xs')]: {
       paddingTop: 400,
@@ -228,7 +230,9 @@ function App(props) {
               trans={{transform: `rotate(${rotations[idx]}deg) translateX(${transX[idx]}px) translateY(${transY[idx]}px)`}}/>
           </Slide>
         )}
-        <MobileStepper steps={maxSteps} position="static" variant="text" activeStep={step} className={classes.stepper}/>
+        <div className={classes.stepper}>
+          {Decks[Object.keys(playDecks).find(i => playDecks[i])].levels[level-1]} &nbsp;&nbsp;-&nbsp;&nbsp; {step+1} / {maxSteps}
+        </div>
       </div>
       <Backdrop className={classes.backdrop} open={openWelcome} onClick={handleToggleWelcome} mountOnEnter unmountOnExit>
         <div className={classes.backdropContent} style={{maxWidth: 500}}>

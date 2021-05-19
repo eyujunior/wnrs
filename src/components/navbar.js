@@ -1,4 +1,4 @@
-import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider } from '@material-ui/core'
+import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider, Dialog, ListItem } from '@material-ui/core'
 import { InfoRounded, HelpOutlineRounded, GitHub, HomeRounded, VideogameAssetRounded } from '@material-ui/icons';
 import { useEffect, useState } from 'react'
 import * as gameplay from '../decks/instruction'
@@ -24,10 +24,11 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
   },
   deckMenu:{
-    maxHeight: '95vh',
+    padding: theme.spacing(1, 0),
+    maxHeight: '90vh',
   },
   backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
+    zIndex: theme.zIndex.tooltip,
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText,
   },
@@ -127,9 +128,9 @@ export default function NavBar(props) {
         </Menu>
 
         <Button className={classes.option} variant='outlined' onClick={handleDeckClick}>Deck</Button>
-        <Menu anchorEl={deckAnchorEl} keepMounted open={Boolean(deckAnchorEl)} onClose={handleDeckClose} classes={{paper: classes.deckMenu}}>
+        <Dialog open={Boolean(deckAnchorEl)} disablePortal scroll='paper' onClose={handleDeckClose} classes={{paper: classes.deckMenu}}>
           {Object.keys(Decks).map((key, idx) => 
-            <MenuItem key={`deck-${idx}`}>
+            <ListItem key={`deck-${idx}`}>
               <Button value={key} className={classes.button} color='primary'
                 variant={props.playDecks[key] ? 'contained' : 'outlined'} 
                 onClick={props.onDeckChange}>
@@ -138,21 +139,23 @@ export default function NavBar(props) {
               <IconButton onClick={() => handleToggle(key)} className={classes.infoButton}>
                 <InfoRounded />
               </IconButton>
-              <Backdrop className={classes.backdrop} open={open[key]} onClick={() => handleToggle(key)} mountOnEnter unmountOnExit>
-                <div className={classes.info}>
-                  <p><u>{Decks[key].name}</u></p>
-                  <Divider variant='middle'/>
-                  <p>{Decks[key].backDesc !== undefined ? Decks[key].backDesc.join('\n\n') : Decks[key].menu}</p>
-                  <p className={classes.subtitle}>For: {Decks[key].suggestedPlayer}</p>
-                  <Divider variant='middle'/>
-                  {Decks[key].instruction !== undefined 
-                    ? <p className={classes.paragraph}>{Decks[key].instruction.join('\n\n')}</p>
-                    : null}
-                </div>
-              </Backdrop>
-            </MenuItem>
+            </ListItem>
           )}
-        </Menu>
+        </Dialog>
+        {Object.keys(Decks).map((key, idx) => 
+          <Backdrop className={classes.backdrop} open={open[key]} onClick={() => handleToggle(key)} mountOnEnter unmountOnExit key={`deckDesc-${idx}`}>
+            <div className={classes.info}>
+              <p><u>{Decks[key].name}</u></p>
+              <Divider variant='middle'/>
+              <p>{Decks[key].backDesc !== undefined ? Decks[key].backDesc.join('\n\n') : Decks[key].menu}</p>
+              <p className={classes.subtitle}>For: {Decks[key].suggestedPlayer}</p>
+              <Divider variant='middle'/>
+              {Decks[key].instruction !== undefined 
+                ? <p className={classes.paragraph}>{Decks[key].instruction.join('\n\n')}</p>
+                : null}
+            </div>
+          </Backdrop>
+        )}
 
         <IconButton onClick={handleToggleHelp}>
           <HelpOutlineRounded className={classes.linkButton}/>
