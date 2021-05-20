@@ -1,9 +1,10 @@
 import { Card, CardContent, makeStyles, Box } from '@material-ui/core'
 import * as Decks from '../decks'
-import {forwardRef} from 'react'
+import { forwardRef } from 'react'
 
 const smallSize = [360, 248]
 const largeSize = [480, 330]
+const ratio = largeSize[0]/smallSize[0]
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   card: {
-    
     [theme.breakpoints.down('sm')]: {
       width: smallSize[0],
       height: smallSize[1],
@@ -29,8 +29,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       width: largeSize[0],
       height: largeSize[1],
-      padding: theme.spacing(1.5),
-      fontSize: largeSize[0]/smallSize[0] * theme.typography.h6.fontSize
+      padding: theme.spacing(1*ratio),
+      fontSize: ratio * theme.typography.h6.fontSize
     },
     borderRadius: 55,
     ...theme.typography.h6,
@@ -63,11 +63,8 @@ const useStyles = makeStyles((theme) => ({
       top: largeSize[1]/2,
       left: largeSize[0]/2,
     },
-    transform: 'translateX(-50%) translateY(-50%)',
+    transform: 'translate(-50%, -50%)',
     width: `calc(100% - ${theme.spacing(4)}px)`,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
   },
   flexRow: {
     display: 'flex',
@@ -76,7 +73,8 @@ const useStyles = makeStyles((theme) => ({
   },
   reminderHeader: {
     textAlign: 'left',
-    paddingRight: theme.spacing(4),
+    [theme.breakpoints.down('xs')]: { paddingRight: theme.spacing(2) },
+    [theme.breakpoints.up('sm')]:  {paddingRight: theme.spacing(2*ratio) },
   },
   reminderContent: {
     textAlign: 'left',
@@ -88,7 +86,7 @@ const useStyles = makeStyles((theme) => ({
   footerEdition:{
     padding: '0 !important',
     fontSize: '0.45em',   
-  }
+  },
 }))
 
 export default forwardRef( function WNRSCard(props, ref) {
@@ -109,8 +107,8 @@ export default forwardRef( function WNRSCard(props, ref) {
   return (
     <Box className={classes.root} ref={ref}>
       <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} 
-        variant='outlined' aria-label={props.content} style={props.trans}>
-        <div className={classes.content}>
+        elevation="1" aria-label={props.content} style={{...props.trans, visibility: props.visibility}} onClick={props.toggleEnlarge}>
+        <div className={props.contentClass ? props.contentClass : classes.content}>
           {isWildcard 
             ? <div className={classes.wildCardHeader}>WildCard</div>
             : null }

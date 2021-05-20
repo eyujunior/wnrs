@@ -1,24 +1,16 @@
-import WNRSCard from './components/card'
-import * as Decks from './decks'
-import NavBar from './components/navbar'
-import { makeStyles, CssBaseline, Slide, Backdrop } from '@material-ui/core'
-import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded, ArrowUpwardRounded } from '@material-ui/icons'
 import { useEffect, useState } from 'react';
 import { use100vh } from 'react-div-100vh'
+import { makeStyles, CssBaseline, Slide, Backdrop } from '@material-ui/core'
+import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded } from '@material-ui/icons'
 
-const hexToRgb = (hex) => {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
-}
+import * as Decks from './decks'
+import { WNRSCard, NavBar, Welcome, Control } from './components'
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
     display: 'flex',
+    position: 'relative',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
@@ -64,48 +56,15 @@ const useStyles = makeStyles((theme) => ({
   leftArrow: {left: '1%' },
   rightArrow: {right: '1%'},
   backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: theme.palette.primary.main,
-    color: theme.palette.primary.contrastText,
-    paddingTop: theme.spacing(2),
+    zIndex: theme.zIndex.tooltip,
   },
-  backdropContent:{
-    display: 'flex',
-    flexDirection: 'column',
-    ...theme.typography.h6,
-    whiteSpace: 'pre-line',
-    textTransform: 'uppercase',
-    textAlign: 'center',
-    width: '80%',
-  },
-  level: {
-    paddingTop: theme.spacing(2),
-    alignItems: 'center',
-    alignSelf: 'flex-start',
+  backdropCard: {
     position: 'fixed',
-    width: 'auto',
-    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 103 },
-    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 0px))', right: 111 },
-  },
-  decks: {
-    paddingTop: theme.spacing(2),
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    position: 'fixed',
-    width: 'auto',
-    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 13 },
-    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 64px))', right: 21 },
-  },
-  subtitle: {
-    fontWeight: 400,
-    textTransform: 'none',
-    fontSize: '0.8em'
-  },
-  opacity: {
-    backgroundColor: (() => {
-      let rgb = hexToRgb(theme.palette.primary.main);
-      return `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, 0.85)`
-    })(),
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    [theme.breakpoints.down('xs')]: { width: 360 - theme.spacing(4)},
+    [theme.breakpoints.up('sm')]:   { width: 480 - theme.spacing(4)},
   }
 }));
 
@@ -120,6 +79,7 @@ function App(props) {
   const [transY]                  = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
   const [controlPanel, setControlPanel] = useState(99);
   const [openWelcome, setOpenWelcome] = useState(true);
+  const [enlarge, setEnlarge] = useState(false);
 
   const height = use100vh();
   var maxSteps = cards == null ? 0 : cards[level-1].length; 
@@ -176,8 +136,10 @@ function App(props) {
     setStep(step - 1);    
   }
 
-  const handleToggleWelcome = () => {setOpenWelcome(!openWelcome); setControlPanel(0);}
-  const handleToggleControl = () => setControlPanel(controlPanel+1);
+  const toggleWelcomePanel = () => {setOpenWelcome(!openWelcome); setControlPanel(0);}
+  const toggleControlPanel = () => setControlPanel(controlPanel+1);
+
+  const toggleEnlarge = () => setEnlarge(!enlarge)
 
   const initDeck = () => {
     let startingDeck = {};
@@ -186,15 +148,12 @@ function App(props) {
     setPlayDecks(startingDeck);
   }
 
-  useEffect(() => {
-    initDeck()
-  }, [])
+  useEffect(() => initDeck(), [])
 
   useEffect(() => {
-    if (controlPanel === 0){
-      initDeck()
-      setLevel('1')
-    }
+    if (controlPanel !== 0) return;
+    initDeck()
+    setLevel('1')
   }, [controlPanel])
 
   useEffect(() => {
@@ -218,50 +177,31 @@ function App(props) {
   return (
     <>
       <CssBaseline/>
-      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange} handleToggleControl={() => setControlPanel(0)}/>
+      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange} toggleControlPanel={() => setControlPanel(0)}/>
+
       <div onClick={handleBack} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}} className={`${classes.nav} ${classes.leftNav}`}/>
       <div onClick={handleNext} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}} className={`${classes.nav} ${classes.rightNav}`}/>
       <KeyboardArrowLeftRounded className={`${classes.arrow} ${classes.leftArrow}`} style={step === 0 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
       <KeyboardArrowRightRounded className={`${classes.arrow} ${classes.rightArrow}`} style={step === cards[level-1].length-1 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
+
+      <Welcome openWelcome={openWelcome} toggleWelcomePanel={toggleWelcomePanel} />
+      <Control controlPanel={controlPanel} toggleControlPanel={toggleControlPanel}/>
+
+      <Backdrop open={enlarge} className={classes.backdrop} onClick={toggleEnlarge}>
+        <WNRSCard decks={getAllTrue(playDecks)} level={level} content={cards[level-1][step]} contentClass={classes.backdropCard}/>
+      </Backdrop>
+
       <div className={classes.root} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}}>
         {cards[level-1].map((card, idx) => 
           <Slide direction="down" in={idx <= step} mountOnEnter unmountOnExit key={`Card${idx}`}>
-            <WNRSCard decks={getAllTrue(playDecks)} level={level} content={card} className={classes.card}  
-              trans={{transform: `rotate(${rotations[idx]}deg) translateX(${transX[idx]}px) translateY(${transY[idx]}px)`}}/>
+            <WNRSCard decks={getAllTrue(playDecks)} level={level} content={card} className={classes.card} visibility={enlarge ? 'hidden' : 'visible'}
+              trans={{transform: `rotate(${rotations[idx]}deg) translate(${transX[idx]}px, ${transY[idx]}px)`}} toggleEnlarge={toggleEnlarge}/>
           </Slide>
         )}
         <div className={classes.stepper}>
           {Decks[Object.keys(playDecks).find(i => playDecks[i])].levels[level-1]} &nbsp;&nbsp;-&nbsp;&nbsp; {step+1} / {maxSteps}
         </div>
       </div>
-      <Backdrop className={classes.backdrop} open={openWelcome} onClick={handleToggleWelcome} mountOnEnter unmountOnExit>
-        <div className={classes.backdropContent} style={{maxWidth: 500}}>
-          <p><u>We're not really strangers</u></p>
-          <p>Warning:<br/>Feelings may arise.</p>
-          <p>Ready?</p>
-          <p className={classes.subtitle}>Reminder: Open your heart.<br/><br/>Add this application to your home page<br/> to begin a conversation with anyone anytime.</p>
-        </div>
-      </Backdrop>
-      <Backdrop className={`${classes.backdrop} ${classes.opacity}`} open={controlPanel < 3} onClick={handleToggleControl} mountOnEnter unmountOnExit>
-        {controlPanel === 0
-          ? <div className={classes.backdropContent}>
-              <p style={{textAlign: 'left'}}>Click on left side<br/>of the screen<br/>for the previous card.</p>
-              <p style={{textAlign: 'right'}}>Click on right side<br/>of the screen<br/>for the next card.</p>
-            </div>
-          : null }
-        {controlPanel === 1
-          ? <div className={`${classes.backdropContent} ${classes.level}`}>
-              <ArrowUpwardRounded/>
-              <p style={{width: 180}}>Whenever you feel comfortable, change level here.</p>
-            </div>
-          : null}
-        {controlPanel === 2 || controlPanel === 3
-          ? <div className={`${classes.backdropContent} ${classes.decks}`}>
-              <ArrowUpwardRounded/>
-              <p style={{width: 180}}>Change deck here. Some decks are best used when added to the original WNRS card game.</p>
-            </div>
-          : null} 
-      </Backdrop>
     </>
   );
 }

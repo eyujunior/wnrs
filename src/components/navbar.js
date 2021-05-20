@@ -1,8 +1,7 @@
 import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider, Dialog, ListItem } from '@material-ui/core'
-import { InfoRounded, HelpOutlineRounded, GitHub, HomeRounded, VideogameAssetRounded } from '@material-ui/icons';
+import { InfoRounded } from '@material-ui/icons';
 import { useEffect, useState } from 'react'
-import * as gameplay from '../decks/instruction'
-import * as metadata from '../components/metadata'
+import HowToPlay from './howToPlay'
 import * as Decks from '../decks'
 
 const useStyles = makeStyles((theme) => ({
@@ -82,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
 export default function NavBar(props) {
   const classes = useStyles();
   const [open, setOpen] = useState(null);
-  const [openHelp, setOpenHelp] = useState(false);
   const [deckAnchorEl, setDeckAnchorEl] = useState(null);
   const [levelAnchorEl, setLevelAnchorEl] = useState(null);
 
@@ -95,11 +93,6 @@ export default function NavBar(props) {
   const handleDeckClose = () => setDeckAnchorEl(null);
 
   const handleToggle = (key) => setOpen({...open, [key]: !open[key]})
-
-  const handleToggleHelp = () => setOpenHelp(!openHelp);
-
-  const onGithub = () => window.open("https://github.com/jonathan-lph/wnrs")
-  const onWNRS = () => window.open("https://werenotreallystrangers.com")
 
   useEffect(() => {
     let obj = {};
@@ -159,41 +152,8 @@ export default function NavBar(props) {
           </Backdrop>
         )}
 
-        <IconButton onClick={handleToggleHelp}>
-          <HelpOutlineRounded className={classes.linkButton}/>
-        </IconButton>
-        <Backdrop className={classes.backdrop} open={openHelp} onClick={handleToggleHelp} mountOnEnter unmountOnExit>
-          <div className={classes.info}>
-            <p><u>How to Play</u></p>
-            <p>Pick a card. Read it out loud to your partner(s) and listen to their answer.</p>
-            <div className={classes.row}>
-              <div className={classes.infoLevel}>Level 1<br/>Perception</div>
-              <div className={classes.paragraph}>{gameplay.levelOne}</div>
-            </div>
-            <div className={classes.row}>
-              <div className={classes.infoLevel}>Level 2<br/>Connection</div>
-              <div className={classes.paragraph}>{gameplay.levelTwo}</div>
-            </div>
-            <div className={classes.row}>
-              <div className={classes.infoLevel}>Level 3<br/>Reflection</div>
-              <div className={classes.paragraph}>{gameplay.levelThree}</div>
-            </div>
-            <div className={classes.row}>
-              <div className={classes.infoLevel}>Wildcard</div>
-              <div className={classes.paragraph}>{gameplay.wildcards}</div>
-            </div>
-            <div className={classes.row}>
-              <IconButton className={classes.linkButton} onClick={onWNRS}><HomeRounded/></IconButton>
-              <IconButton className={classes.linkButton} onClick={onGithub} ><GitHub/></IconButton>
-              <IconButton className={classes.linkButton} onClick={props.handleToggleControl}><VideogameAssetRounded /></IconButton>
-            </div>
-            <div className={`${classes.row} ${classes.subtitle}`}>
-              {metadata.copyright}s<br/>
-              Developed by {metadata.developer} - {metadata.version}
-            </div>
-            <div className={classes.subtitle}>{metadata.contact}</div>
-          </div>
-        </Backdrop>
+        <HowToPlay toggleControlPanel={props.toggleControlPanel} />
+
       </Toolbar>
     </AppBar>
   )
