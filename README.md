@@ -1,4 +1,4 @@
-# Web-based We're Not Really Strangers
+# We're Not Really Strangers (WNRS) Online
 
 No ads. No profits. No downloads. Just [a free-to-all platform](https://jonathan-lph.github.io/wnrs) to all people who will enjoy We're Not Really Strangers.
 
