@@ -46,8 +46,9 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: theme.spacing(1, 0),
   },
-  linkButton: {
+  iconButton: {
     color: theme.palette.primary.contrastText,
+    padding: theme.spacing(1),
   }
 }))
 
@@ -62,8 +63,8 @@ export default function HowToPlay (props) {
   
   return (
     <>
-      <IconButton onClick={handleToggleHelp}>
-        <HelpOutlineRounded className={classes.linkButton}/>
+      <IconButton onClick={handleToggleHelp} className={classes.iconButton}>
+        <HelpOutlineRounded/>
       </IconButton>
       <Backdrop className={classes.backdrop} open={openHelp} onClick={handleToggleHelp} mountOnEnter unmountOnExit>
         <div className={classes.info}>
@@ -86,9 +87,9 @@ export default function HowToPlay (props) {
             <div className={classes.paragraph}>{gameplay.wildcards}</div>
           </div>
           <div className={classes.row}>
-            <IconButton className={classes.linkButton} onClick={onWNRS}><HomeRounded/></IconButton>
-            <IconButton className={classes.linkButton} onClick={onGithub} ><GitHub/></IconButton>
-            <IconButton className={classes.linkButton} onClick={props.toggleControlPanel}><VideogameAssetRounded /></IconButton>
+            <IconButton className={classes.iconButton} onClick={onWNRS}><HomeRounded/></IconButton>
+            <IconButton className={classes.iconButton} onClick={onGithub} ><GitHub/></IconButton>
+            <IconButton className={classes.iconButton} onClick={props.toggleControlPanel}><VideogameAssetRounded /></IconButton>
           </div>
           <div className={`${classes.row} ${classes.subtitle}`}>
             {metadata.copyright}<br/>

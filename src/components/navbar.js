@@ -1,5 +1,5 @@
 import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider, Dialog, ListItem } from '@material-ui/core'
-import { InfoRounded } from '@material-ui/icons';
+import { InfoRounded, FullscreenExitRounded, FullscreenRounded } from '@material-ui/icons';
 import { useEffect, useState } from 'react'
 import HowToPlay from './howToPlay'
 import * as Decks from '../decks'
@@ -73,10 +73,18 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     margin: theme.spacing(1, 0),
   },
-  linkButton: {
+  iconButton: {
     color: theme.palette.primary.contrastText,
+    padding: theme.spacing(1),
   }
 }))
+
+function isMobile() {
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  if (/android/i.test(userAgent) ) return true;
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) return true;
+  return false;
+}
 
 export default function NavBar(props) {
   const classes = useStyles();
@@ -93,7 +101,7 @@ export default function NavBar(props) {
   const handleDeckClose = () => setDeckAnchorEl(null);
 
   const handleToggle = (key) => setOpen({...open, [key]: !open[key]})
-
+  
   useEffect(() => {
     let obj = {};
     Object.keys(Decks).forEach(key => obj[key] = false);
@@ -108,7 +116,8 @@ export default function NavBar(props) {
 
         <Button className={classes.option} variant='outlined' onClick={handleLevelClick} 
           disabled={levels.length === 1}>
-          {levels[props.level-1].startsWith('Level') ? levels[props.level-1].slice(0, 7) : levels[props.level-1]}
+          {/*levels[props.level-1].startsWith('Level') ? levels[props.level-1].slice(0, 7) : levels[props.level-1]*/}
+          Level
         </Button>
         <Menu anchorEl={levelAnchorEl} keepMounted open={Boolean(levelAnchorEl)} onClose={handleLevelClose} classes={{paper: classes.levelMenu}}>
           {levels.map((levelDesc, idx) => 
@@ -153,6 +162,11 @@ export default function NavBar(props) {
         )}
 
         <HowToPlay toggleControlPanel={props.toggleControlPanel} />
+
+        <IconButton onClick={props.fsHandle.active ? props.fsHandle.exit : props.fsHandle.enter} className={classes.iconButton} 
+          disabled={window.matchMedia('(display-mode: standalone)').matches || isMobile()}>
+          {props.fsHandle.active ? <FullscreenExitRounded/> : <FullscreenRounded/>}
+        </IconButton>
 
       </Toolbar>
     </AppBar>

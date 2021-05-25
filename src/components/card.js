@@ -107,7 +107,7 @@ export default forwardRef( function WNRSCard(props, ref) {
   return (
     <Box className={classes.root} ref={ref}>
       <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} 
-        elevation="1" aria-label={props.content} style={{...props.trans, visibility: props.visibility}} onClick={props.toggleEnlarge}>
+        elevation={1} aria-label={props.content} style={{...props.trans, visibility: props.visibility}} onClick={props.toggleEnlarge}>
         <div className={props.contentClass ? props.contentClass : classes.content}>
           {isWildcard 
             ? <div className={classes.wildCardHeader}>WildCard</div>

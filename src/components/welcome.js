@@ -16,11 +16,6 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     width: '80%',
   },
-  subtitle: {
-    fontWeight: 400,
-    textTransform: 'none',
-    fontSize: '0.8em'
-  },
 }));
 
 export default function Welcome(props) {
@@ -31,10 +26,6 @@ export default function Welcome(props) {
         <p><u>We're not really strangers</u></p>
         <p>Warning:<br/>Feelings may arise.</p>
         <p>Ready?</p>
-        <p className={classes.subtitle}>
-          Reminder: Open your heart.<br/><br/>
-          Add this application to your home page<br/> to begin a conversation with anyone anytime.
-        </p>
       </div>
     </Backdrop>
   )

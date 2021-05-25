@@ -30,23 +30,20 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'center',
     width: '80%',
   },
-  level: {
+  fixedTooltip: {
     paddingTop: theme.spacing(2),
     alignItems: 'center',
     alignSelf: 'flex-start',
     position: 'fixed',
-    width: 'auto',
-    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 103 },
-    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 0px))', right: 111 },
+    width: 250,
+  },
+  level: {
+    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 89 },
+    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 0px))', right: 97 },
   },
   decks: {
-    paddingTop: theme.spacing(2),
-    alignItems: 'center',
-    alignSelf: 'flex-start',
-    position: 'fixed',
-    width: 'auto',
-    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 13 },
-    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 64px))', right: 21 },
+    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 6 },
+    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 64px))', right: 14 },
   },
   opacity: {
     backgroundColor: (() => {
@@ -81,6 +78,15 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     alignSelf: 'flex-end',
     alignItems: 'center',
+  },
+  title: {
+    width: 250,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: '0.8em',
+    textTransform: 'none',
+    margin: 0,
   }
 }));
 
@@ -93,25 +99,27 @@ export default function Control(props) {
       ? <div className={classes.backdropContent}>
           <div className={classes.leftRow}>
             <KeyboardArrowLeftRounded fontSize="large"/>
-            <p style={{textAlign: 'left'}}>Click on left side<br/>of the screen<br/>for the previous card.</p>
+            <p style={{textAlign: 'left'}}>Tap left<br/>for the previous card</p>
           </div>
-          <div variant="outlined" className={classes.card}>Click on the card<br/>to enlarge.</div>
+          <div variant="outlined" className={classes.card}>Click the card<br/>to enlarge</div>
           <div className={classes.rightRow}>
-            <p style={{textAlign: 'right'}}>Click on right side<br/>of the screen<br/>for the next card.</p>
+            <p style={{textAlign: 'right'}}>Tap right<br/>for the next card</p>
             <KeyboardArrowRightRounded fontSize="large"/>
           </div>
         </div>
       : null }
       {props.controlPanel === 1
-      ? <div className={`${classes.backdropContent} ${classes.level}`}>
+      ? <div className={`${classes.backdropContent} ${classes.fixedTooltip} ${classes.level}`}>
         <ArrowUpwardRounded/>
-        <p style={{width: 180}}>Whenever you feel comfortable, change level here.</p>
+        <p className={classes.title}>Change level here</p>
+        <p className={`${classes.title} ${classes.subtitle}`}>Whenever you feel comfortable,<br/> move on to the next level.</p>
         </div>
       : null}
       {props.controlPanel === 2 || props.controlPanel === 3
-      ? <div className={`${classes.backdropContent} ${classes.decks}`}>
-        <ArrowUpwardRounded/>
-        <p style={{width: 180}}>Change deck here. Some decks are best used when added to the original WNRS card game.</p>
+      ? <div className={`${classes.backdropContent} ${classes.fixedTooltip} ${classes.decks}`}>
+          <ArrowUpwardRounded/>
+          <p className={classes.title}>Change deck here</p>
+          <p className={`${classes.title} ${classes.subtitle}`}>Some decks are best used when added<br/> to the original WNRS card game.</p>
         </div>
       : null} 
     </Backdrop>

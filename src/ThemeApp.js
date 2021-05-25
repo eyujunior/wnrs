@@ -1,10 +1,12 @@
 import baseTheme from  './styles/MUItheme'
 import { ThemeProvider, createMuiTheme, CssBaseline } from '@material-ui/core'
+import { FullScreen, useFullScreenHandle } from "react-full-screen";
 import { useState } from 'react';
 import App from './App'
 
 function ThemeApp() {
   const [MUITheme, setMUITheme] = useState(createMuiTheme(baseTheme)); 
+  const fsHandle = useFullScreenHandle();
 
   const changeColor = (color) => {
     let childColor = color.primary === undefined
@@ -23,7 +25,9 @@ function ThemeApp() {
   return (
       <ThemeProvider theme={MUITheme}>
         <CssBaseline/>
-        <App changeColor={changeColor}/>
+        <FullScreen handle={fsHandle}>
+          <App changeColor={changeColor} fsHandle={fsHandle}/>
+        </FullScreen>
       </ThemeProvider>
   );
 }

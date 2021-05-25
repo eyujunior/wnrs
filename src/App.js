@@ -4,7 +4,7 @@ import { makeStyles, CssBaseline, Slide, Backdrop } from '@material-ui/core'
 import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded } from '@material-ui/icons'
 
 import * as Decks from './decks'
-import { WNRSCard, NavBar, Welcome, Control } from './components'
+import { WNRSCard, NavBar, Welcome, Control, InstallPrompt } from './components'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -79,6 +79,7 @@ function App(props) {
   const [transY]                  = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
   const [controlPanel, setControlPanel] = useState(99);
   const [openWelcome, setOpenWelcome] = useState(true);
+  const [openInstall, setOpenInstall] = useState(false);
   const [enlarge, setEnlarge] = useState(false);
 
   const height = use100vh();
@@ -136,7 +137,15 @@ function App(props) {
     setStep(step - 1);    
   }
 
-  const toggleWelcomePanel = () => {setOpenWelcome(!openWelcome); setControlPanel(0);}
+  const toggleWelcomePanel = () => {
+    setOpenWelcome(!openWelcome); 
+    if (window.matchMedia('(display-mode: standalone)').matches === false) setOpenInstall(true);
+    else setControlPanel(0);
+  }
+  const toggleInstallPanel = () => {
+    setOpenInstall(!openInstall); 
+    setControlPanel(0);
+  }
   const toggleControlPanel = () => setControlPanel(controlPanel+1);
 
   const toggleEnlarge = () => setEnlarge(!enlarge)
@@ -150,11 +159,11 @@ function App(props) {
 
   useEffect(() => initDeck(), [])
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (controlPanel !== 0) return;
     initDeck()
     setLevel('1')
-  }, [controlPanel])
+  }, [controlPanel])*/
 
   useEffect(() => {
     if (playDecks == null) return;
@@ -177,7 +186,8 @@ function App(props) {
   return (
     <>
       <CssBaseline/>
-      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} onDeckChange={onDeckChange} toggleControlPanel={() => setControlPanel(0)}/>
+      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} 
+        onDeckChange={onDeckChange} toggleControlPanel={() => setControlPanel(0)} fsHandle={props.fsHandle}/>
 
       <div onClick={handleBack} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}} className={`${classes.nav} ${classes.leftNav}`}/>
       <div onClick={handleNext} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}} className={`${classes.nav} ${classes.rightNav}`}/>
@@ -185,6 +195,7 @@ function App(props) {
       <KeyboardArrowRightRounded className={`${classes.arrow} ${classes.rightArrow}`} style={step === cards[level-1].length-1 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
 
       <Welcome openWelcome={openWelcome} toggleWelcomePanel={toggleWelcomePanel} />
+      <InstallPrompt openInstall={openInstall} toggleInstallPanel={toggleInstallPanel} />
       <Control controlPanel={controlPanel} toggleControlPanel={toggleControlPanel}/>
 
       <Backdrop open={enlarge} className={classes.backdrop} onClick={toggleEnlarge}>
