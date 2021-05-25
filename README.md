@@ -16,6 +16,7 @@ No ads. No profits. No downloads. Just [a free-to-all platform](https://jonathan
   - Bumble Date 
   - Bumble BFF
   - Bumble Bizz
+- WNRS x Valetino Pack (from online sources)
 
 ### Missing Decks
 
@@ -23,7 +24,6 @@ No ads. No profits. No downloads. Just [a free-to-all platform](https://jonathan
 - Healing Edition
 - Self-love Edition
 - WNRS X DVF Own It Expansion Pack
-- WNRS x Valetino Pack
 
 ### Credits
 
