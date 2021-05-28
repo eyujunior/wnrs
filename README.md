@@ -1,6 +1,6 @@
 # We're Not Really Strangers (WNRS) Online
 
-No ads. No profits. No downloads. Just [a free-to-all platform](https://jonathan-lph.github.io/wnrs) to all people who will enjoy We're Not Really Strangers.
+Play WNRS online in [jonathan-lph.github.io/wnrs](https://jonathan-lph.github.io/wnrs). No ads. No profits. No downloads.
 
 ### Available Decks
 
