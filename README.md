@@ -11,11 +11,11 @@ Play WNRS online in [jonathan-lph.github.io/wnrs](https://jonathan-lph.github.io
 - Breakup Edition
 - Self-reflection Edition
 - Quarantine Edition (Online PDF version)
-- Race and Privilege Edition (Online PDF version)
-- WNRS x Bumble Edition
-  - Bumble Date 
-  - Bumble BFF
-  - Bumble Bizz
+- [Race and Privilege Edition (Online PDF version)](https://drive.google.com/file/d/1nNqIKv7wa4f3EYHCcXkutoznRx6qDDaz/view)
+- [WNRS x Bumble Edition](https://bumble.com/en/the-buzz/wnrs-card-game)
+  - [Bumble Date](https://dl.dropboxusercontent.com//s/vk4u4zc3i7gmsvf/WNRS_Date%20Cards.pdf?dl=0)
+  - [Bumble BFF](https://dl.dropboxusercontent.com/s/9238tjyf204ly3i/WNRS_BFF%20Cards.pdf)
+  - [Bumble Bizz](https://dl.dropboxusercontent.com/s/o6tzq56xlql5osx/WNRS_Bizz%20Cards.pdf?dl=0)
 - WNRS x Valetino Pack (from online sources)
 
 ### Missing Decks
