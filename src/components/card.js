@@ -93,8 +93,18 @@ export default forwardRef( function WNRSCard(props, ref) {
   const classes = useStyles();
   const isWildcard = props.content.startsWith('Wild Card')
   const isReminder = props.content.startsWith('Reminder')
-  const question = isWildcard ? props.content.slice(10) : isReminder ? props.content.slice(9) : props.content;
-  
+
+  const __ownItRegex = /\[([^\]]+)\]\(([^)]+)\)/i
+
+  const question = {
+    __html: 
+      isWildcard 
+      ? props.content.slice(10).replace(__ownItRegex, (match, p1, p2) => p2)
+      : isReminder
+        ? props.content.slice(9) 
+        : props.content.replace(__ownItRegex, (match, p1, p2) => `<span style="color: ${p1}">${p2}</span>`)
+  }
+
   const getDeck = (() => {
     if (props.decks.length === 1) return Decks[props.decks[0]]
     for (let i = 0; i < props.decks.length; i++)
@@ -104,21 +114,23 @@ export default forwardRef( function WNRSCard(props, ref) {
     return ""
   })()
 
+  const cardColor = (() => {
+    const found = props.content.match(__ownItRegex)
+    if (isWildcard && found) return {backgroundColor: found[1]} // If card overrides
+    if (props.decks.length >= 1 && !isWildcard && !isReminder) return {color: getDeck.color.secondary.main}
+    if (props.decks.length >= 1 && (isWildcard || isReminder)) return {backgroundColor: getDeck.color.primary.main, color: getDeck.color.primary.contrastText}
+    return {}
+  })()
+
   return (
     <Box className={classes.root} ref={ref}>
       <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} 
-        elevation={1} aria-label={props.content} style={{...props.trans, visibility: props.visibility}} onClick={props.toggleEnlarge}>
+        elevation={1} aria-label={props.content} style={{...props.trans, ...cardColor, visibility: props.visibility, }} onClick={props.toggleEnlarge}>
         <div className={props.contentClass ? props.contentClass : classes.content}>
-          {isWildcard 
-            ? <div className={classes.wildCardHeader}>WildCard</div>
-            : null }
+          {isWildcard && <div className={classes.wildCardHeader}>WildCard</div>}
           <div className={classes.flexRow}>
-            {isReminder
-              ? <div className={classes.reminderHeader}>Reminder</div>
-              : null }
-            <span className={isReminder ? classes.reminderContent : null} style={{whiteSpace: 'pre-line'}}>
-              {question}
-            </span>
+            {isReminder && <div className={classes.reminderHeader}>Reminder</div>}
+            <div className={isReminder ? classes.reminderContent : null} style={{whiteSpace: 'pre-line'}} dangerouslySetInnerHTML={question}/>
           </div>
         </div>
         <CardContent className={classes.footer}>

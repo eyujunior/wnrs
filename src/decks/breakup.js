@@ -3,14 +3,25 @@ export const menu = "Breakup"
 export const edition = "Breakup Edition"
 export const suggestedPlayer = "1+ player"
 export const color = {
-    main:  '#c10016',
-    contrastText: '#ffffff',
+    primary: {
+        main:  '#c10016',
+        contrastText: '#ffffff',
+    },
+    secondary: {
+        main:  '#c10016',
+    }
 }
 export const levels = ['Breakup', 'Final Card']
 export const isExpansion = false
 
 export const backDesc = [
     "The end of a relationship\n is the beginning of a new\n one... with yourself"
+]
+
+export const instruction = [
+    "Breakups are important. They teach us about ourselves. They show us what we want and what we don’t. They allow us to move away from what isn’t for us – and closer to what is. They even show us parts of ourselves we need to break up.", 
+    "We’ve created this edition as a tool to self-reflect after a breakup. Journal your answers or play with a friend who can be a soundboard for your healing process. The end of a relationship is the beginning of a new one… with yourself.",
+    "Ready?",
 ]
 
 export const level1 = [ // 47 / 50 cards
@@ -50,6 +61,9 @@ export const level1 = [ // 47 / 50 cards
     "Imagine you're talking to\n your ex. Finish the sentence:\n I'm sorry for _________.",
     "What's your ex's name\n and one thing about them?",
     "Did you like your ex as a\n person? Or were you just in\n love? Explain.",
+    "What feels unique about this heartbreak, if anything?",
+    "What advice would you give a friend or loved one going through a similar situation as you?",
+    "If you could ask your ex one thing and get a completely honest answer, what would it be?",
 
     "Wild Card Write down 3 things\n you love about yourself that aren't physical.",
     "Wild Card Write a note to your future\n self. Fold and place somewhere\n safe. Set a reminder to open\n 3 months from today.",
