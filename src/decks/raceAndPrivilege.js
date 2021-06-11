@@ -3,8 +3,13 @@ export const menu = "Race & Privilege"
 export const edition = "Race & Privilege Edition"
 export const suggestedPlayer = "2+ players"
 export const color = {
-    main:  '#181818',
-    contrastText: '#ffffff',
+    primary: {
+        main:  '#181818',
+        contrastText: '#ffffff',
+    },
+    secondary: {
+        main:  '#181818',
+    }
 }
 export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Reflection']
 export const isExpansion = false

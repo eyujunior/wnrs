@@ -3,8 +3,13 @@ export const menu = "Valentino"
 export const crossover = "Valentino"
 export const suggestedPlayer = "2+ players"
 export const color = {
-    main:  '#4e1214',
-    contrastText: '#ffffff',
+    primary: {
+        main:  '#4e1214',
+        contrastText: '#ffffff',
+    },
+    secondary: {
+        main:  '#4e1214',
+    }
 }
 export const levels = ['Valentino']
 export const isExpansion = false
@@ -37,7 +42,7 @@ export const level1 = [ // 25 / 25 cards
     "How have you neglected\n yourself recently? What's\n one thing you can do to make\n it up to yourself this week,\n big or small?",
     "What \"failure\" taught\n you the most this year?\n What did it teach you?",
     "What are you holding onto that are hurting you the most? What's one small step you can take towards letting it go?",
-    "Who derserves more of your time? How can you show up for them?",
+    "Who deserves more of your time? How can you show up for them?",
     "What are you still\n trying to understand\n about yourself?",
     "What is the hardest thing for you to understand about yourself?",
     "What do you give in too much energy to? What is that at the expense of?",

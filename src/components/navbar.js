@@ -152,7 +152,7 @@ export default function NavBar(props) {
               <p><u>{Decks[key].name}</u></p>
               <Divider variant='middle'/>
               <p>{Decks[key].backDesc !== undefined ? Decks[key].backDesc.join('\n\n') : Decks[key].menu}</p>
-              <p className={classes.subtitle}>For: {Decks[key].suggestedPlayer}</p>
+              <p className={classes.subtitle}>For: {Decks[key].suggestedPlayer}{Decks[key].isExpansion ? " | Best with Main deck" : null}</p>
               <Divider variant='middle'/>
               {Decks[key].instruction !== undefined 
                 ? <p className={classes.paragraph}>{Decks[key].instruction.join('\n\n')}</p>

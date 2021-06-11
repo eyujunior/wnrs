@@ -3,8 +3,13 @@ export const menu = "Self-reflection"
 export const edition = "Self-reflection Edition"
 export const suggestedPlayer = "1 player"
 export const color = {
-    main:  '#c10016',
-    contrastText: '#ffffff',
+    primary: {
+        main:  '#c10016',
+        contrastText: '#ffffff',
+    },
+    secondary: {
+        main:  '#c10016',
+    }
 }
 export const levels = ["Self-reflection"]
 export const isExpansion = false
@@ -63,7 +68,7 @@ export const level1 = [ // 52 cards
     "Wild Card Look in the mirror today\n and give yourself a\n genuine compliment.",
     "Wild Card What do I need to get\n off my chest? (Write it out.)",
     "Wild Card What is my happiness level on a\n scale of 1-10? (Write it down and\n date it. Why is it this number?\n What would make it 1\n score higher?)",
-    "Wild Card What feels impossible today that\n would shock me to accomplish in\n a year? (Write it down and date it/)",
+    "Wild Card What feels impossible today that\n would shock me to accomplish in\n a year? (Write it down and date it.)",
     "Wild Card Take 3 deep breaths\n before answering the\n next question.",
     "Wild Card What do I need to hear\n most right now? (Write it\n out. Place somewhere\n you'll see often.)",
     "Wild Card What are 3 things I love\n most about myself today?\n (Write them out.)"

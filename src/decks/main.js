@@ -2,8 +2,13 @@ export const name = "Main Card Game"
 export const menu = "Main"
 export const suggestedPlayer = "2-6 players"
 export const color = {
-  main:  '#c10016',
-  contrastText: '#ffffff',
+  primary: {
+    main:  '#c10016',
+    contrastText: '#ffffff',
+  },
+  secondary: {
+      main:  '#c10016',
+  }
 }
 export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Reflection', 'Final Card']
 export const isExpansion = true

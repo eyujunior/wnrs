@@ -3,8 +3,13 @@ export const menu = "Honest Dating"
 export const edition = "Honest Dating Expansion Pack"
 export const suggestedPlayer = "2 players"
 export const color = {
-    main:  '#c10016',
-    contrastText: '#ffffff',
+    primary: {
+        main:  '#c10016',
+        contrastText: '#ffffff',
+    },
+    secondary: {
+        main:  '#c10016',
+    }
 }
 export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Reflection']
 export const isExpansion = true
