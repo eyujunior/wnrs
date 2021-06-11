@@ -115,6 +115,7 @@ export default forwardRef( function WNRSCard(props, ref) {
   })()
 
   const cardColor = (() => {
+    if (getDeck === "") return {};
     const found = props.content.match(__ownItRegex)
     if (isWildcard && found) return {backgroundColor: found[1]} // If card overrides
     if (props.decks.length >= 1 && !isWildcard && !isReminder) return {color: getDeck.color.secondary.main}

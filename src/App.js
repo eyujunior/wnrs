@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    // backgroundColor: theme.palette.primary.light,
   },
   button: {
     margin: theme.spacing(1),
@@ -51,6 +52,7 @@ const useStyles = makeStyles((theme) => ({
     top: '50%',
     fontSize: 60,
     margin: '0 0 -30 -30',
+    zIndex: 20,
     color: theme.palette.primary.light,
   },
   leftArrow: {left: '1%' },

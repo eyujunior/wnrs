@@ -19,8 +19,8 @@ export const backDesc = [
 ]
 
 export const instruction = [
-    "Breakups are important. They teach us about ourselves. They show us what we want and what we don’t. They allow us to move away from what isn’t for us – and closer to what is. They even show us parts of ourselves we need to break up.", 
-    "We’ve created this edition as a tool to self-reflect after a breakup. Journal your answers or play with a friend who can be a soundboard for your healing process. The end of a relationship is the beginning of a new one… with yourself.",
+    "Breakups are important. They teach us about ourselves. They show us what we want and what we don't. They allow us to move away from what isn't for us – and closer to what is. They even show us parts of ourselves we need to break up.", 
+    "We've created this edition as a tool to self-reflect after a breakup. Journal your answers or play with a friend who can be a soundboard for your healing process. The end of a relationship is the beginning of a new one… with yourself.",
     "Ready?",
 ]
 
