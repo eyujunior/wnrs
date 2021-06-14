@@ -15,8 +15,7 @@ export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Refl
 export const isExpansion = false
 
 export const backDesc = [
-    "What if dating was\n as simple as getting to know\n another human being?",
-    "No games, just this one."
+    "Bumble BFF",
 ]
 
 export const level1 = [

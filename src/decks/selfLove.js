@@ -76,7 +76,7 @@ export const level1 = [ // 51 cards
     "Wild Card Write out an affirmation you need to hear most in this current moment. Repeat it everyday this week.",
     "Reminder Replace \"That was\n so stupid of me\"\n with \"That was\n so human of me.\"",
     "Reminder You deserve to\n take a breath. Relax\n for a moment. You've\n made it this far.\n Take that in.", //
-    "Reminder The more you love\n yourself the better\n your relationships\n with everyone\n else will be.",
+    "Reminder The more you love\n yourself the better\n your relationships\n with everyone else\n will be.",
 ]
 
 export const finalCard = [

@@ -62,7 +62,7 @@ export const level1 = [ // 47 / 50 cards
     "What's your ex's name\n and one thing about them?",
     "Did you like your ex as a\n person? Or were you just in\n love? Explain.",
     "What feels unique about this heartbreak, if anything?",
-    "What advice would you give a friend or loved one going through a similar situation as you?",
+    "What advice would you\n give a friend or loved one\n going through a similar\n situation as you?",
     "If you could ask your ex one thing and get a completely honest answer, what would it be?",
 
     "Wild Card Write down 3 things\n you love about yourself that aren't physical.",

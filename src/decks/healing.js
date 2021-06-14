@@ -25,6 +25,7 @@ export const instruction = [
 ]
 
 export const level1 = [
+  "What does prioritizing your\n mental health look like in this\n chapter of your life?\n Get specific.",
   "Reminder I'm proud of the\n progress you're\n making. No matter\n how small.",
   "Reminder You don't have\n to have it all\n figured out right\n now. Sleep on it.",
 ]
