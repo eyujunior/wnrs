@@ -147,7 +147,8 @@ export default function NavBar(props) {
           )}
         </Dialog>
         {Object.keys(Decks).map((key, idx) => 
-          <Backdrop className={classes.backdrop} open={open[key]} onClick={() => handleToggle(key)} mountOnEnter unmountOnExit key={`deckDesc-${idx}`}>
+          <Backdrop className={classes.backdrop} open={open[key]} onClick={() => handleToggle(key)} mountOnEnter unmountOnExit key={`deckDesc-${idx}`}
+           style={{backgroundColor: Decks[key].color.primary.main, color: Decks[key].color.primary.contrastText}}>
             <div className={classes.info}>
               <p><u>{Decks[key].name}</u></p>
               <Divider variant='middle'/>

@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: 'left',
     textTransform: 'none',
     fontWeight: 400,
-    fontSize: theme.typography.h6.fontSize - 1,
+    fontSize: theme.typography.h6.fontSize - 2,
     flexGrow: 5,
   },
   subtitle: {

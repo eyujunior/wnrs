@@ -76,9 +76,9 @@ function App(props) {
   const [step,      setStep]      = useState(0);
   const [playDecks, setPlayDecks] = useState(null);
   const [cards,     setCards]     = useState(null);
-  const [rotations]               = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
-  const [transX]                  = useState(Array.from({length: 300}, () => 8 - Math.random() * 16))
-  const [transY]                  = useState(Array.from({length: 300}, () => 12 - Math.random() * 24))
+  const [rotations]               = useState([0, ...Array.from({length: 300}, () => 12 - Math.random() * 24)])
+  const [transX]                  = useState([0, ...Array.from({length: 300}, () => 8 - Math.random() * 16)])
+  const [transY]                  = useState([0, ...Array.from({length: 300}, () => 12 - Math.random() * 24)])
   const [controlPanel, setControlPanel] = useState(99);
   const [openWelcome, setOpenWelcome] = useState(true);
   const [openInstall, setOpenInstall] = useState(false);
@@ -139,14 +139,13 @@ function App(props) {
     setStep(step - 1);    
   }
 
-  const toggleWelcomePanel = () => {
-    setOpenWelcome(!openWelcome); 
-    if (window.matchMedia('(display-mode: standalone)').matches === false) setOpenInstall(true);
-    else setControlPanel(0);
+  const toggleWelcomePanel = (startControl) => {
+    setOpenWelcome(!openWelcome);
+    if (startControl) setControlPanel(0);
   }
   const toggleInstallPanel = () => {
     setOpenInstall(!openInstall); 
-    setControlPanel(0);
+    setOpenWelcome(true);
   }
   const toggleControlPanel = () => setControlPanel(controlPanel+1);
 
@@ -159,7 +158,10 @@ function App(props) {
     setPlayDecks(startingDeck);
   }
 
-  useEffect(() => initDeck(), [])
+  useEffect(() => {
+    if (window.matchMedia('(display-mode: standalone)').matches === false) setOpenInstall(true);
+    initDeck()
+  }, [])
 
   /*useEffect(() => {
     if (controlPanel !== 0) return;
@@ -196,7 +198,7 @@ function App(props) {
       <KeyboardArrowLeftRounded className={`${classes.arrow} ${classes.leftArrow}`} style={step === 0 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
       <KeyboardArrowRightRounded className={`${classes.arrow} ${classes.rightArrow}`} style={step === cards[level-1].length-1 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
 
-      <Welcome openWelcome={openWelcome} toggleWelcomePanel={toggleWelcomePanel} />
+      <Welcome openWelcome={openWelcome} toggleWelcomePanel={toggleWelcomePanel}/>
       <InstallPrompt openInstall={openInstall} toggleInstallPanel={toggleInstallPanel} />
       <Control controlPanel={controlPanel} toggleControlPanel={toggleControlPanel}/>
 

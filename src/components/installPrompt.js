@@ -35,6 +35,7 @@ export default function Welcome(props) {
         <p>Add this app to your home screen<br/>to connect with people<br/>anytime, anywhere.</p>
         <p className={classes.subtitle}><b>IOS:</b><br/> {"Open in Safari > Share > Add to Home Screen"}</p>
         <p className={classes.subtitle}><b>Android:</b><br/> {"Open in Chrome > Menu > Add to homescreen"}</p>
+        <p className={classes.subtitle}>Click anywhere to continue...</p>
       </div>
     </Backdrop>
   )
