@@ -38,12 +38,16 @@ const useStyles = makeStyles((theme) => ({
     width: 250,
   },
   level: {
-    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 89 },
-    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 0px))', right: 97 },
+    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 52 },
+    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 0px))', right: 60 },
   },
   decks: {
-    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 6 },
-    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 64px))', right: 14 },
+    [theme.breakpoints.down('xs')]: { paddingTop: 'calc(56px + env(safe-area-inset-top, 0px))', right: 0 },
+    [theme.breakpoints.up('sm')]:   { paddingTop: 'calc(64px + env(safe-area-inset-top, 64px))', right: 8 },
+  },
+  deckArrow:{
+    [theme.breakpoints.down('xs')]: { marginLeft: 67},
+    [theme.breakpoints.up('sm')]:   { marginLeft: 64},
   },
   opacity: {
     backgroundColor: (() => {
@@ -94,8 +98,8 @@ export default function Control(props) {
   const classes = useStyles();
 
   return (
-    <Backdrop className={`${classes.backdrop} ${classes.opacity}`} open={props.controlPanel < 3} onClick={props.toggleControlPanel} mountOnEnter unmountOnExit>
-      {props.controlPanel === 0
+    <Backdrop className={`${classes.backdrop} ${classes.opacity}`} open={props.control < 3} onClick={props.toggleControlPanel} mountOnEnter unmountOnExit>
+      {props.control === 0
       ? <div className={classes.backdropContent}>
           <div className={classes.leftRow}>
             <KeyboardArrowLeftRounded fontSize="large"/>
@@ -108,16 +112,16 @@ export default function Control(props) {
           </div>
         </div>
       : null }
-      {props.controlPanel === 1
+      {props.control === 1
       ? <div className={`${classes.backdropContent} ${classes.fixedTooltip} ${classes.level}`}>
         <ArrowUpwardRounded/>
         <p className={classes.title}>Change level here</p>
         <p className={`${classes.title} ${classes.subtitle}`}>Whenever you feel comfortable,<br/> move on to the next level.</p>
         </div>
       : null}
-      {props.controlPanel === 2 || props.controlPanel === 3
+      {props.control === 2 || props.control === 3
       ? <div className={`${classes.backdropContent} ${classes.fixedTooltip} ${classes.decks}`}>
-          <ArrowUpwardRounded/>
+          <ArrowUpwardRounded className={classes.deckArrow}/>
           <p className={classes.title}>Change deck here</p>
           <p className={`${classes.title} ${classes.subtitle}`}>Some decks are best used when added<br/> to the original WNRS card game.</p>
         </div>

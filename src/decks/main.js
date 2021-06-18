@@ -104,7 +104,7 @@ export const level2 = [ // 52 cards
   "What is a compliment\n you wish you received\n more frequently?", //
   "Have you changed your mind about anything recently?",
   "Describe your perfect day!",
-  "What is the most unexplainable thing that's ever happened to you?",
+  "What is the most\nunexplainable thing\n that's ever happened\n to you?", //
   "What would your younger\n self not believe about\n your life today?", //
   "What is something you wouldn't want to change about yourself?",
   "What title would you give this\n chapter in your life?", //
@@ -115,7 +115,7 @@ export const level2 = [ // 52 cards
   "What question are you trying to\n answer most in your life right\n now?",
   "What's been the best\n compliment a stranger\n has ever given you?", //
 
-  "Wild Card Staring contest. First to blink must reveal a personal problem and ask your partner for advice on how they might handle it.",
+  "Wild Card Staring contest. First\n to blink must reveal\n a personal problem\n and ask your partner\n for advice on how they\n might handle it.", //
   "Wild Card Ask a question you'd\n be too afraid to ask.\n Something you wouldn't\n dare to ask.", //
   "Wild Card Call someone you admire and tell them why you appreciate them! (Put on speaker phone)",
   "Wild Card Admit something.",
@@ -134,7 +134,7 @@ export const level2 = [ // 52 cards
 
 export const level3 = [ // 49 cards
   "How would you describe me to a stranger?",
-  "What about me surprised you?",
+  "What about me\n most surprised you?", //
   "What would be\n the perfect gift\n for me?",
   "What do you admire\n most about me?", //
   "Based on what you\n learned about me,\n what book would\n you recommend I\n read?",
@@ -158,7 +158,7 @@ export const level3 = [ // 49 cards
   "What parts of\n yourself do you see in me?", //
   "How do our personalities\n complement each other?", //
   "Why do you think we met?", // 
-  "What do you think my weakness is?",
+  "What do you think\n my weakness is?", //
   "What would make\n you feel closer\n to me?", //
   "What do you think I\n fear the most?", //
   "What has this\n conversation taught you\n about yourself?", //

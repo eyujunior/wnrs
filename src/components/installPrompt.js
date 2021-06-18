@@ -1,5 +1,6 @@
-import { makeStyles, Backdrop } from '@material-ui/core'
-import { AddToHomeScreenRounded } from '@material-ui/icons';
+import { makeStyles, Snackbar, Slide } from '@material-ui/core'
+import { Alert, AlertTitle } from '@material-ui/lab'
+import { AddToHomeScreenRounded} from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   backdrop: {
@@ -22,21 +23,20 @@ const useStyles = makeStyles((theme) => ({
   subtitle: {
     fontWeight: 400,
     textTransform: 'none',
-    fontSize: '0.8em'
+    fontSize: '0.9em'
   },
 }));
 
 export default function Welcome(props) {
   const classes = useStyles();
   return (
-    <Backdrop className={classes.backdrop} open={props.openInstall} onClick={props.toggleInstallPanel} mountOnEnter unmountOnExit>
-      <div className={classes.backdropContent}>
-        <AddToHomeScreenRounded style={{fontSize: '5em'}}/>
-        <p>Add this app to your home screen<br/>to connect with people<br/>anytime, anywhere.</p>
-        <p className={classes.subtitle}><b>IOS:</b><br/> {"Open in Safari > Share > Add to Home Screen"}</p>
-        <p className={classes.subtitle}><b>Android:</b><br/> {"Open in Chrome > Menu > Add to homescreen"}</p>
-        <p className={classes.subtitle}>Click anywhere to continue...</p>
-      </div>
-    </Backdrop>
+    <Snackbar open={props.install} autoHideDuration={6000} onClose={props.toggleInstallPanel}
+      TransitionComponent={Slide}>
+      <Alert icon={<AddToHomeScreenRounded/>} elevation={6} severity="info" onClose={props.toggleInstallPanel} >
+        <AlertTitle>Install to connect with people anytime, anywhere.</AlertTitle>
+        <span className={classes.subtitle}><b>iOS:</b> Open in Safari &gt; Share &gt; Add to Home Screen</span> <br/>
+        <span className={classes.subtitle}><b>Android:</b> Open in Chrome &gt; Menu &gt; Add to homescreen</span>
+      </Alert>
+    </Snackbar>
   )
 }

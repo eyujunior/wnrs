@@ -34,12 +34,12 @@ const useStyles = makeStyles((theme) => ({
 export default function Welcome(props) {
   const classes = useStyles();
   return (
-    <Backdrop className={classes.backdrop} open={props.openWelcome} onClick={() => props.toggleWelcomePanel(false)} mountOnEnter unmountOnExit>
+    <Backdrop className={classes.backdrop} open={props.welcome} onClick={props.toggleWelcomePanel(false)} mountOnEnter unmountOnExit>
       <div className={classes.backdropContent} style={{maxWidth: 500}}>
         <p><u>We're not really strangers</u></p>
         <p>Warning:<br/>Feelings may arise.</p>
         <p>Ready?</p>
-        <Button className={classes.button} size="large" variant="outlined" onClick={() => props.toggleWelcomePanel(true)}>
+        <Button className={classes.button} size="large" variant="outlined" onClick={props.toggleWelcomePanel(true)}>
           Show control &nbsp; <VideogameAssetRounded/>
         </Button>
         <p className={classes.paragraph}>or click anywhere to continue...</p>

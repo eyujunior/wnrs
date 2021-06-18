@@ -73,18 +73,23 @@ const useStyles = makeStyles((theme) => ({
 function App(props) {
   const classes = useStyles();
   const [level,     setLevel]     = useState('1');
-  const [step,      setStep]      = useState(0);
-  const [playDecks, setPlayDecks] = useState(null);
+  const [step,      setStep]      = useState(1);
+  const [playDecks, setPlayDecks] = useState({...Object.fromEntries(Object.entries(Decks).map(([key, value]) => [key, false])), main: true});
   const [cards,     setCards]     = useState(null);
-  const [rotations]               = useState([0, ...Array.from({length: 300}, () => 12 - Math.random() * 24)])
-  const [transX]                  = useState([0, ...Array.from({length: 300}, () => 8 - Math.random() * 16)])
-  const [transY]                  = useState([0, ...Array.from({length: 300}, () => 12 - Math.random() * 24)])
-  const [controlPanel, setControlPanel] = useState(99);
-  const [openWelcome, setOpenWelcome] = useState(true);
-  const [openInstall, setOpenInstall] = useState(false);
+  const [transform]               = useState({
+    rotation: [0, ...Array.from({length: 150}, () => 12 - Math.random() * 24)],
+    transX:   [0, ...Array.from({length: 150}, () => 8  - Math.random() * 16)],
+    transY:   [0, ...Array.from({length: 150}, () => 12 - Math.random() * 24)],
+  })
+  const [panels, setPanels] = useState({
+    control: 99,
+    welcome: true,
+    install: false,
+  })
   const [enlarge, setEnlarge] = useState(false);
 
   const height = use100vh();
+  const isInstalled = window.matchMedia('(display-mode: standalone)').matches;
   var maxSteps = cards == null ? 0 : cards[level-1].length; 
 
   const shuffle = (arr) => {
@@ -108,7 +113,7 @@ function App(props) {
 
   const onLevelChange = (e) => {
     setLevel(e.currentTarget.value);
-    setStep(0);
+    setStep(1);
   }
 
   const onDeckChange = (e) => {
@@ -125,49 +130,39 @@ function App(props) {
     }
     setPlayDecks(newPlayDecks)
     setLevel('1');
-    setStep(0);
+    setStep(1);
     props.changeColor(Decks[firstTrue].color)
   }
 
   const handleNext = () => {
-    if (step === cards[level-1].length-1) return;
+    if (step === cards[level-1].length) return;
     setStep(step + 1);
   }
 
   const handleBack = () => {
-    if (step === 0) return;
+    if (step === 1) return;
     setStep(step - 1);    
   }
 
-  const toggleWelcomePanel = (startControl) => {
-    setOpenWelcome(!openWelcome);
-    if (startControl) setControlPanel(0);
+  const toggleWelcomePanel = (startControl) => (e) => {
+    e.stopPropagation();
+    setPanels({
+      ...panels, 
+      welcome: !panels.welcome, 
+      control: startControl ? 0 : panels.control,
+      install: !startControl && !isInstalled ? true : false,
+    })
   }
-  const toggleInstallPanel = () => {
-    setOpenInstall(!openInstall); 
-    setOpenWelcome(true);
+  const toggleInstallPanel = (e, reason) => {
+    if (reason === 'clickaway') return;
+    setPanels({...panels, install: !panels.install})
   }
-  const toggleControlPanel = () => setControlPanel(controlPanel+1);
-
+  const toggleControlPanel = () => setPanels({
+    ...panels, 
+    control: panels.control+1, 
+    install: !isInstalled && panels.control === 2
+  });
   const toggleEnlarge = () => setEnlarge(!enlarge)
-
-  const initDeck = () => {
-    let startingDeck = {};
-    Object.keys(Decks).forEach(key => startingDeck[key] = false);
-    startingDeck.main = true;
-    setPlayDecks(startingDeck);
-  }
-
-  useEffect(() => {
-    if (window.matchMedia('(display-mode: standalone)').matches === false) setOpenInstall(true);
-    initDeck()
-  }, [])
-
-  /*useEffect(() => {
-    if (controlPanel !== 0) return;
-    initDeck()
-    setLevel('1')
-  }, [controlPanel])*/
 
   useEffect(() => {
     if (playDecks == null) return;
@@ -191,30 +186,30 @@ function App(props) {
     <>
       <CssBaseline/>
       <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} 
-        onDeckChange={onDeckChange} toggleControlPanel={() => setControlPanel(0)} fsHandle={props.fsHandle}/>
+        onDeckChange={onDeckChange} toggleControlPanel={() => setPanels({...panels, control: 0})} fsHandle={props.fsHandle}/>
 
       <div onClick={handleBack} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}} className={`${classes.nav} ${classes.leftNav}`}/>
       <div onClick={handleNext} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}} className={`${classes.nav} ${classes.rightNav}`}/>
-      <KeyboardArrowLeftRounded className={`${classes.arrow} ${classes.leftArrow}`} style={step === 0 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
-      <KeyboardArrowRightRounded className={`${classes.arrow} ${classes.rightArrow}`} style={step === cards[level-1].length-1 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
+      <KeyboardArrowLeftRounded className={`${classes.arrow} ${classes.leftArrow}`} style={step === 1 ? {color: 'rgba(0,0,0,0.26)'}: null}/>
+      <KeyboardArrowRightRounded className={`${classes.arrow} ${classes.rightArrow}`} style={step === cards[level-1].length ? {color: 'rgba(0,0,0,0.26)'}: null}/>
 
-      <Welcome openWelcome={openWelcome} toggleWelcomePanel={toggleWelcomePanel}/>
-      <InstallPrompt openInstall={openInstall} toggleInstallPanel={toggleInstallPanel} />
-      <Control controlPanel={controlPanel} toggleControlPanel={toggleControlPanel}/>
+      <Welcome       welcome={panels.welcome} toggleWelcomePanel={toggleWelcomePanel}/>
+      <InstallPrompt install={panels.install} toggleInstallPanel={toggleInstallPanel} />
+      <Control       control={panels.control} toggleControlPanel={toggleControlPanel}/>
 
       <Backdrop open={enlarge} className={classes.backdrop} onClick={toggleEnlarge}>
-        <WNRSCard decks={getAllTrue(playDecks)} level={level} content={cards[level-1][step]} contentClass={classes.backdropCard}/>
+        <WNRSCard decks={getAllTrue(playDecks)} level={level} content={cards[level-1][step-1]} contentClass={classes.backdropCard}/>
       </Backdrop>
 
       <div className={classes.root} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}}>
         {cards[level-1].map((card, idx) => 
-          <Slide direction="down" in={idx <= step} mountOnEnter unmountOnExit key={`Card${idx}`}>
+          <Slide direction="down" in={idx <= step-1} mountOnEnter unmountOnExit key={`Card${idx}`}>
             <WNRSCard decks={getAllTrue(playDecks)} level={level} content={card} className={classes.card} visibility={enlarge ? 'hidden' : 'visible'}
-              trans={{transform: `rotate(${rotations[idx]}deg) translate(${transX[idx]}px, ${transY[idx]}px)`}} toggleEnlarge={toggleEnlarge}/>
+              trans={{transform: `rotate(${transform.rotation[idx]}deg) translate(${transform.transX[idx]}px, ${transform.transY[idx]}px)`}} toggleEnlarge={toggleEnlarge}/>
           </Slide>
         )}
         <div className={classes.stepper}>
-          {Decks[Object.keys(playDecks).find(i => playDecks[i])].levels[level-1]} &nbsp;&nbsp;-&nbsp;&nbsp; {step+1} / {maxSteps}
+          {Decks[Object.keys(playDecks).find(i => playDecks[i])].levels[level-1]} &nbsp;&nbsp;-&nbsp;&nbsp; {step} / {maxSteps}
         </div>
       </div>
     </>

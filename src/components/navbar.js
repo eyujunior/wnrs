@@ -1,6 +1,7 @@
-import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider, Dialog, ListItem } from '@material-ui/core'
-import { InfoRounded, FullscreenExitRounded, FullscreenRounded } from '@material-ui/icons';
-import { useEffect, useState } from 'react'
+import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider, Dialog, Drawer, List, ListSubheader, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import { InfoRounded, FullscreenExitRounded, FullscreenRounded, MoreVertRounded, GitHub, HomeRounded, VideogameAssetRounded, HelpOutlineRounded, Reddit } from '@material-ui/icons';
+import { useState } from 'react'
+import * as metadata from './metadata'
 import HowToPlay from './howToPlay'
 import * as Decks from '../decks'
 
@@ -76,6 +77,15 @@ const useStyles = makeStyles((theme) => ({
   iconButton: {
     color: theme.palette.primary.contrastText,
     padding: theme.spacing(1),
+  },
+  list: {
+    width: '230px',
+    paddingTop: 'env(safe-area-inset-top)',
+  },
+  listText: {
+    fontSize: '0.85rem',
+    fontWeight: 700, 
+    textTransform: 'uppercase',
   }
 }))
 
@@ -88,9 +98,14 @@ function isMobile() {
 
 export default function NavBar(props) {
   const classes = useStyles();
-  const [open, setOpen] = useState(null);
+  const [openInfo, setOpenInfo] = useState(Object.fromEntries(Object.entries(Decks).map(([key, value]) => [key, false])));
   const [deckAnchorEl, setDeckAnchorEl] = useState(null);
   const [levelAnchorEl, setLevelAnchorEl] = useState(null);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [openHelp, setOpenHelp] = useState({
+    howToPlay: false,
+    control: false,
+  })
 
   const levels = Decks[Object.keys(props.playDecks).find(i => props.playDecks[i])].levels
 
@@ -100,15 +115,10 @@ export default function NavBar(props) {
   const handleDeckClick = (event) => setDeckAnchorEl(event.currentTarget);
   const handleDeckClose = () => setDeckAnchorEl(null);
 
-  const handleToggle = (key) => setOpen({...open, [key]: !open[key]})
-  
-  useEffect(() => {
-    let obj = {};
-    Object.keys(Decks).forEach(key => obj[key] = false);
-    setOpen(obj);
-  }, [])
+  const handleToggle = (key) => () => setOpenInfo({...openInfo, [key]: !openInfo[key]})
 
-  if (open == null) return <div/>
+  const toggleDrawer = () => setOpenDrawer(!openDrawer);
+
   return (
     <AppBar className={classes.appBar}>
       <Toolbar>
@@ -140,14 +150,14 @@ export default function NavBar(props) {
                 onClick={props.onDeckChange}>
                 {Decks[key].menu}
               </Button>
-              <IconButton onClick={() => handleToggle(key)} className={classes.infoButton}>
+              <IconButton onClick={handleToggle(key)} className={classes.infoButton}>
                 <InfoRounded />
               </IconButton>
             </ListItem>
           )}
         </Dialog>
         {Object.keys(Decks).map((key, idx) => 
-          <Backdrop className={classes.backdrop} open={open[key]} onClick={() => handleToggle(key)} mountOnEnter unmountOnExit key={`deckDesc-${idx}`}
+          <Backdrop className={classes.backdrop} open={openInfo[key]} onClick={handleToggle(key)} mountOnEnter unmountOnExit key={`deckDesc-${idx}`}
            style={{backgroundColor: Decks[key].color.primary.main, color: Decks[key].color.primary.contrastText}}>
             <div className={classes.info}>
               <p><u>{Decks[key].name}</u></p>
@@ -162,12 +172,52 @@ export default function NavBar(props) {
           </Backdrop>
         )}
 
-        <HowToPlay toggleControlPanel={props.toggleControlPanel} />
-
-        <IconButton onClick={props.fsHandle.active ? props.fsHandle.exit : props.fsHandle.enter} className={classes.iconButton} 
-          disabled={window.matchMedia('(display-mode: standalone)').matches || isMobile()}>
-          {props.fsHandle.active ? <FullscreenExitRounded/> : <FullscreenRounded/>}
+        <IconButton onClick={toggleDrawer} className={classes.iconButton}>
+          <MoreVertRounded/>
         </IconButton>
+        <Drawer anchor="right" open={openDrawer} onClose={toggleDrawer} onClick={toggleDrawer}>
+          <List className={classes.list} subheader={<ListSubheader>Help</ListSubheader>}>
+            <ListItem button onClick={() => setOpenHelp({...openHelp, howToPlay: true})}>
+              <ListItemIcon><HelpOutlineRounded/></ListItemIcon>
+              <ListItemText disableTypography className={classes.listText}>How to play</ListItemText>
+            </ListItem>
+            <ListItem button onClick={props.toggleControlPanel}>
+              <ListItemIcon><VideogameAssetRounded/></ListItemIcon>
+              <ListItemText disableTypography className={classes.listText}>Controls</ListItemText>
+            </ListItem>
+            {/*!(window.matchMedia('(display-mode: standalone)').matches || isMobile()) && 
+              <ListItem button onClick={props.fsHandle.active ? props.fsHandle.exit : props.fsHandle.enter}>
+                <ListItemIcon>{props.fsHandle.active ? <FullscreenExitRounded/> : <FullscreenRounded/>}</ListItemIcon>
+                <ListItemText disableTypography className={classes.listText}>{props.fsHandle.active ? "Exit" : "Enter"} Fullscreen</ListItemText>
+              </ListItem>
+            */}
+          </List>
+          <Divider/>
+          <List subheader={<ListSubheader>Links</ListSubheader>}>
+            <ListItem button onClick={() => window.open("https://werenotreallystrangers.com")}>
+              <ListItemIcon><HomeRounded/></ListItemIcon>
+              <ListItemText>Official WNRS</ListItemText>
+            </ListItem>
+            <ListItem button onClick={() => window.open("https://github.com/jonathan-lph/wnrs")}>
+              <ListItemIcon><GitHub/></ListItemIcon>
+              <ListItemText>GitHub</ListItemText>
+            </ListItem>
+            <ListItem button onClick={() => window.open("https://www.reddit.com/r/cardgames/comments/nf47ps/were_not_really_strangers_online")}>
+              <ListItemIcon><Reddit/></ListItemIcon>
+              <ListItemText>Reddit</ListItemText>
+            </ListItem>
+          </List>
+          <List style={{marginTop: 'auto'}}>
+            <ListItem>
+              <ListItemText disableTypography>
+              {metadata.copyright}<br/>
+              Developed by {metadata.developer} - {metadata.version}<br/>
+              </ListItemText>
+            </ListItem>
+          </List>
+        </Drawer>
+
+        <HowToPlay open={openHelp.howToPlay} toggleOpen={() => setOpenHelp({...openHelp, howToPlay: !openHelp.howToPlay})}/>
 
       </Toolbar>
     </AppBar>
