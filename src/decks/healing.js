@@ -72,8 +72,8 @@ export const level1 = [
   "Wild Card Take 3 deep breaths before flipping to the next card. Hold for 2 seconds between each breath.",
   "Wild Card Write down the names of everyone you feel unconditionally loved by. Make more time for these people (even if it's yourself).",
   "Wild Card Delete all of your social media apps for a day. Journal about how you felt after.",
-  "Reminder Pay attention to who you're with when you feel your best.",
-  "Reminder If you're trying not to think about it, it's probably time to heal it.",
+  "Reminder Pay attention to\n who you're with\n when you feel\n your best.",
+  "Reminder If you're trying\n not to think\n about it, it's\n probably time\n to heal it.",
   "Reminder You don't have\n to have it all\n figured out right\n now. Sleep on it.", //
   "Reminder I'm proud of the\n progress you're\n making. No matter\n how small.", //
 ]

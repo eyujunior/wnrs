@@ -10,6 +10,7 @@ module.exports = {
     healing:          require('./healing'),
     quarantine:       require('./quarantine'),
     raceAndPrivilege: require('./raceAndPrivilege'),
+    voting:           require('./voting'),
     bumbleDate:       require('./bumbleDate'),
     bumbleBFF:        require('./bumbleBFF'),
     bumbleBizz:       require('./bumbleBizz'),

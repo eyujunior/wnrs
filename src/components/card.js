@@ -58,13 +58,14 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       top: smallSize[1]/2,
       left: smallSize[0]/2,
+      width: 'calc(100% - 22px)',
     },
     [theme.breakpoints.up('sm')]: {
       top: largeSize[1]/2,
       left: largeSize[0]/2,
+      width: 'calc(100% - 30px)',
     },
     transform: 'translate(-50%, -50%)',
-    width: `calc(100% - ${theme.spacing(4)}px)`,
   },
   flexRow: {
     display: 'flex',

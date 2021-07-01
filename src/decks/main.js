@@ -44,7 +44,7 @@ export const level1 = [ // 49 cards
   "What does my phone wallpaper tell you about me?",
   "Do I look kind?\n explain.", //
   "Do you think I fall in love easily? why or why not?",
-  "As a child, what do you think I wanted to be?",
+  "As a child, what do\n you think I wanted\n to be?", //
   "Do you think I'm usually early, on time, or late to events? Explain.",
   "What subject do you think\n I thrived in at school? Did I\n fail any?", //
   "What compliment do you think I hear the most?",
@@ -52,7 +52,7 @@ export const level1 = [ // 49 cards
   "What fast food restaurant do you think I'm most likely to drive through? What's my order?",
   "What is my body language\n telling you right now?", //
   "What does my Instagram\n tell you about me?", //
-  "Do you think plants thrive or die in my care? Explain.",
+  "Do you think plants\n thrive or die in my\n care? Explain.", //
   "On a scale of 1-10, how messy\n do you think my car is? 1 being\n cleanest, 10 complete\n disaster. Explain.", //
   "Do you think I was\n popular in school?\n explain.", //
   "Do you think I've ever been\n fired from a job? If so, what\n for?", //

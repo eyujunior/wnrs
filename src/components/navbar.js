@@ -25,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
   },
   deckMenu:{
     padding: theme.spacing(1, 0),
-    maxHeight: '90vh',
+    maxHeight: '85vh',
   },
   backdrop: {
     zIndex: theme.zIndex.tooltip,

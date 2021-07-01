@@ -15,6 +15,7 @@ Play WNRS online in [jonathan-lph.github.io/wnrs](https://jonathan-lph.github.io
 - Healing Edition
 - Quarantine Edition (Online PDF version)
 - [Race and Privilege Edition (Online PDF version)](https://drive.google.com/file/d/1nNqIKv7wa4f3EYHCcXkutoznRx6qDDaz/view)
+- Voting Edition (Online PDF version)
 - [WNRS x Bumble Edition](https://bumble.com/en/the-buzz/wnrs-card-game)
   - [Bumble Date](https://dl.dropboxusercontent.com//s/vk4u4zc3i7gmsvf/WNRS_Date%20Cards.pdf?dl=0)
   - [Bumble BFF](https://dl.dropboxusercontent.com/s/9238tjyf204ly3i/WNRS_BFF%20Cards.pdf)
@@ -23,7 +24,7 @@ Play WNRS online in [jonathan-lph.github.io/wnrs](https://jonathan-lph.github.io
 
 ### Missing Decks
 
-None right now! Thanks for all the support!
+None that known of right now! Thanks for all the support!
 
 ### Credits
 
@@ -36,7 +37,8 @@ Thanks to various sources to make this possible:
 - [Honest Dating Expansion Pack PDF](https://dochub.com/roughunderscoreoutlines/r4D6EkZVZZp2mNBVpQXW7O/honest-dating-wnrs-3-pdf?dt=LjiqJAQd6CRamnAoMbew)
 - [Self-reflection Edition PDF](https://dochub.com/roughunderscoreoutlines/8adOrbPVQgljYnBR24Mj7D/self-reflection-wnrs-3-pdf?dt=Z44EAc2EzxcF7YquWmdg)
 - [Breakup Edition PDF](https://docs.google.com/document/d/1-MPhFVRuzj4LZcatqvYJRKnYkIQOwxHr1sYwJ6WYrWM/edit?usp=sharing)
-- H.G. for completing Breakup Edition and providing Self-love Edition, Healing Edition, and the Own It Expansion
+- H.G. for completing the Breakup Edition and providing the Self-love Edition, the Healing Edition, and the Own It Expansion
+- [@cecrandell](https://github.com/cecrandell/) for providing the Voting Edition
 
 I do not own any of the resources above. If you suspect this is copyright infrigment and wish to have this take down, please contact me and I will respond asap.
 
