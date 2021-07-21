@@ -12,7 +12,7 @@ export const color = {
     }
 }
 export const levels = ['Level 1 Perception', 'Level 2 Connection', 'Level 3 Reflection']
-export const isExpansion = false
+export const isExpansion = true
 
 export const level1 = [
     "What was your first\n impression of me on\n Bumble vs. IRL?",

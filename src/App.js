@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     zIndex: '20',
     position: 'fixed',
     top: 0,
+    userSelect: 'none',
   },
   leftNav:  { left:  0 },
   rightNav: { right: 0 },

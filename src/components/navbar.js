@@ -4,6 +4,7 @@ import { useState } from 'react'
 import * as metadata from './metadata'
 import HowToPlay from './howToPlay'
 import * as Decks from '../decks'
+import * as DecksCat from '../decks/categories'
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
@@ -24,7 +25,7 @@ const useStyles = makeStyles((theme) => ({
     width: 200,
   },
   deckMenu:{
-    padding: theme.spacing(1, 0),
+    padding: theme.spacing(0, 0),
     maxHeight: '85vh',
   },
   backdrop: {
@@ -86,6 +87,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '0.85rem',
     fontWeight: 700, 
     textTransform: 'uppercase',
+  },
+  listSubheader: {
+    lineHeight: '30px',
+    paddingTop: theme.spacing(1),
+    borderRadius: theme.spacing(0.5, 0.5, 0, 0)
   }
 }))
 
@@ -143,7 +149,9 @@ export default function NavBar(props) {
 
         <Button className={classes.option} variant='outlined' onClick={handleDeckClick}>Deck</Button>
         <Dialog open={Boolean(deckAnchorEl)} disablePortal scroll='paper' onClose={handleDeckClose} classes={{paper: classes.deckMenu}}>
-          {Object.keys(Decks).map((key, idx) => 
+          {Object.entries(DecksCat).map(([k, v]) => 
+          <List subheader={<ListSubheader className={classes.listSubheader} component='div'>{v.displayName}</ListSubheader>}>
+            {Object.keys(v.decks).map((key, idx) =>
             <ListItem key={`deck-${idx}`}>
               <Button value={key} className={classes.button} color='primary'
                 variant={props.playDecks[key] ? 'contained' : 'outlined'} 
@@ -154,6 +162,8 @@ export default function NavBar(props) {
                 <InfoRounded />
               </IconButton>
             </ListItem>
+            )}
+          </List>
           )}
         </Dialog>
         {Object.keys(Decks).map((key, idx) => 
