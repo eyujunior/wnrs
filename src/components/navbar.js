@@ -1,5 +1,5 @@
 import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider, Dialog, Drawer, List, ListSubheader, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
-import { InfoRounded, FullscreenExitRounded, FullscreenRounded, MoreVertRounded, GitHub, HomeRounded, VideogameAssetRounded, HelpOutlineRounded, Reddit } from '@material-ui/icons';
+import { InfoRounded, MoreVertRounded, GitHub, HomeRounded, VideogameAssetRounded, HelpOutlineRounded, Reddit, LocalCafeRounded } from '@material-ui/icons';
 import { useState } from 'react'
 import * as metadata from './metadata'
 import HowToPlay from './howToPlay'
@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme) => ({
   },
   option: {
     margin: theme.spacing(0, 1),
-    color: theme.palette.primary.contrastText,
+    color: theme.palette.primary.main,
+    backgroundColor: theme.palette.primary.contrastText
   },
   title: {
     flexGrow: 1,
@@ -95,12 +96,12 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function isMobile() {
+/*function isMobile() {
   var userAgent = navigator.userAgent || navigator.vendor || window.opera;
   if (/android/i.test(userAgent) ) return true;
   if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) return true;
   return false;
-}
+}*/
 
 export default function NavBar(props) {
   const classes = useStyles();
@@ -130,7 +131,7 @@ export default function NavBar(props) {
       <Toolbar>
         <Typography variant="h6" className={classes.title}>WNRS</Typography>
 
-        <Button className={classes.option} variant='outlined' onClick={handleLevelClick} 
+        <Button className={classes.option} variant='contained' onClick={handleLevelClick} 
           disabled={levels.length === 1}>
           {/*levels[props.level-1].startsWith('Level') ? levels[props.level-1].slice(0, 7) : levels[props.level-1]*/}
           Level
@@ -147,7 +148,7 @@ export default function NavBar(props) {
           )}
         </Menu>
 
-        <Button className={classes.option} variant='outlined' onClick={handleDeckClick}>Deck</Button>
+        <Button className={classes.option} variant='contained' onClick={handleDeckClick}>Deck</Button>
         <Dialog open={Boolean(deckAnchorEl)} disablePortal scroll='paper' onClose={handleDeckClose} classes={{paper: classes.deckMenu}}>
           {Object.entries(DecksCat).map(([k, v]) => 
           <List subheader={<ListSubheader className={classes.listSubheader} component='div'>{v.displayName}</ListSubheader>}>
@@ -182,7 +183,7 @@ export default function NavBar(props) {
           </Backdrop>
         )}
 
-        <IconButton onClick={toggleDrawer} className={classes.iconButton}>
+        <IconButton onClick={toggleDrawer} className={classes.iconButton} ariaLabel="More">
           <MoreVertRounded/>
         </IconButton>
         <Drawer anchor="right" open={openDrawer} onClose={toggleDrawer} onClick={toggleDrawer}>
@@ -218,6 +219,10 @@ export default function NavBar(props) {
             </ListItem>
           </List>
           <List style={{marginTop: 'auto'}}>
+            <ListItem button onClick={() => window.open("https://www.paypal.me/jonathanlph")}>
+              <ListItemIcon><LocalCafeRounded/></ListItemIcon>
+              <ListItemText>Tip Jar :)</ListItemText>
+            </ListItem>
             <ListItem>
               <ListItemText disableTypography>
               {metadata.copyright}<br/>

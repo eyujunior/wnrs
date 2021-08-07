@@ -126,13 +126,22 @@ export default forwardRef( function WNRSCard(props, ref) {
 
   return (
     <Box className={classes.root} ref={ref}>
-      <Card className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} 
-        elevation={1} aria-label={props.content} style={{...props.trans, ...cardColor, visibility: props.visibility, }} onClick={props.toggleEnlarge}>
+      <Card 
+        onClick={props.toggleEnlarge}
+        aria-label={props.content}
+        className={`${classes.card} ${isWildcard || isReminder ? classes.wildCard: classes.normCard}`} 
+        elevation={1} style={{...props.trans, ...cardColor, visibility: props.visibility, }}
+      >
         <div className={props.contentClass ? props.contentClass : classes.content}>
-          {isWildcard && <div className={classes.wildCardHeader}>WildCard</div>}
+          {isWildcard && 
+            <div className={classes.wildCardHeader}>WildCard</div>}
           <div className={classes.flexRow}>
-            {isReminder && <div className={classes.reminderHeader}>Reminder</div>}
-            <div className={isReminder ? classes.reminderContent : null} style={{whiteSpace: 'pre-line'}} dangerouslySetInnerHTML={question}/>
+            {isReminder && 
+              <div className={classes.reminderHeader}>Reminder</div>}
+            <div dangerouslySetInnerHTML={question}
+              className={isReminder ? classes.reminderContent : null} 
+              style={{whiteSpace: 'pre-line'}}
+            />
           </div>
         </div>
         <CardContent className={classes.footer}>

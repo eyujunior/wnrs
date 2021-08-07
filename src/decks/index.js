@@ -10,6 +10,7 @@ module.exports = {
     selfReflection:   require('./self/selfReflection'),
     selfLove:         require('./self/selfLove'),
     healing:          require('./self/healing'),
+    forgiveness:      require('./self/forgiveness'),
 
     quarantine:       require('./online/quarantine'),
     raceAndPrivilege: require('./online/raceAndPrivilege'),

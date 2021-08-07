@@ -3,4 +3,5 @@ module.exports = {
     selfReflection:   require('./selfReflection'),
     selfLove:         require('./selfLove'),
     healing:          require('./healing'),
+    forgiveness:      require('./forgiveness')
 }

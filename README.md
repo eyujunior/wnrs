@@ -40,7 +40,7 @@ Thanks to various sources to make this possible:
 - [Breakup Edition PDF](https://docs.google.com/document/d/1-MPhFVRuzj4LZcatqvYJRKnYkIQOwxHr1sYwJ6WYrWM/edit?usp=sharing)
 - H.G. for 
   - Completing the Breakup Edition and 
-  - Providing the Self-love Edition, the Healing Edition, and the Own It Expansion
+  - Providing the Self-love Edition, Healing Edition, Forgiveness Edition, and the Own It Expansion
 - [@cecrandell](https://github.com/cecrandell/) for the Voting Edition
 - [u/songbirdly](https://www.reddit.com/user/songbirdly) for the Cann Expansion
 
