@@ -1,4 +1,4 @@
-import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider, Dialog, Drawer, List, ListSubheader, ListItem, ListItemIcon, ListItemText } from '@material-ui/core'
+import { Button, Toolbar, AppBar, Typography, makeStyles, Menu, MenuItem, IconButton, Backdrop, Divider, Dialog, Drawer, List, ListSubheader, ListItem, ListItemIcon, ListItemText, Tooltip } from '@material-ui/core'
 import { InfoRounded, MoreVertRounded, GitHub, HomeRounded, VideogameAssetRounded, HelpOutlineRounded, Reddit, LocalCafeRounded } from '@material-ui/icons';
 import { useState } from 'react'
 import * as metadata from './metadata'
@@ -93,6 +93,24 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: '30px',
     paddingTop: theme.spacing(1),
     borderRadius: theme.spacing(0.5, 0.5, 0, 0)
+  },
+
+  controlTitle: {
+    fontSize: theme.typography.fontSize,
+    textAlign: 'center',
+    textTransform: 'uppercase',
+  },
+  controlSubtitle: {
+    fontSize: theme.typography.fontSize * 0.8,
+    textTransform: 'none',
+    textAlign: 'center',
+  },
+  tooltip: {
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.primary.main
+  },
+  tooltipArrow: {
+    color: theme.palette.common.white,
   }
 }))
 
@@ -131,12 +149,21 @@ export default function NavBar(props) {
       <Toolbar>
         <Typography variant="h6" className={classes.title}>WNRS</Typography>
 
-        <Button className={classes.option} variant='contained' onClick={handleLevelClick} 
-          disabled={levels.length === 1}>
-          {/*levels[props.level-1].startsWith('Level') ? levels[props.level-1].slice(0, 7) : levels[props.level-1]*/}
-          Level
-        </Button>
-        <Menu anchorEl={levelAnchorEl} keepMounted open={Boolean(levelAnchorEl)} onClose={handleLevelClose} classes={{paper: classes.levelMenu}}>
+        <Tooltip arrow open={props.control === 1} classes={{tooltip: classes.tooltip, arrow: classes.tooltipArrow}} title={
+          <>
+          <p className={classes.controlTitle}>Change level here</p>
+          <p className={classes.controlSubtitle}>Whenever you feel comfortable,<br/> move on to the next level.</p>
+          </>
+        }>
+          <Button id="level-button" className={classes.option} variant='contained' onClick={handleLevelClick} disabled={levels.length === 1}>
+            Level
+          </Button>
+        </Tooltip>
+        <Menu keepMounted 
+          anchorEl={levelAnchorEl} getContentAnchorEl={null}
+          anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}     
+          transformOrigin={{vertical: 'top', horizontal: 'center'}}
+          open={Boolean(levelAnchorEl)} onClose={handleLevelClose} classes={{paper: classes.levelMenu}}>
           {levels.map((levelDesc, idx) => 
             <MenuItem onClick={handleLevelClose} key={`level-${idx}`}>
               <Button value={`${idx+1}`} className={classes.button} color='primary'
@@ -148,7 +175,14 @@ export default function NavBar(props) {
           )}
         </Menu>
 
-        <Button className={classes.option} variant='contained' onClick={handleDeckClick}>Deck</Button>
+        <Tooltip arrow open={props.control === 2} classes={{tooltip: classes.tooltip, arrow: classes.tooltipArrow}} title={
+          <>
+          <p className={classes.controlTitle}>Change deck here</p>
+          <p className={classes.controlSubtitle}>Some decks are best used when<br/> added to the original deck.</p>
+          </>
+        }>
+          <Button id="deck-button" className={classes.option} variant='contained' onClick={handleDeckClick}>Deck</Button>
+        </Tooltip>
         <Dialog open={Boolean(deckAnchorEl)} disablePortal scroll='paper' onClose={handleDeckClose} classes={{paper: classes.deckMenu}}>
           {Object.entries(DecksCat).map(([k, v]) => 
           <List subheader={<ListSubheader className={classes.listSubheader} component='div'>{v.displayName}</ListSubheader>}>
@@ -183,7 +217,7 @@ export default function NavBar(props) {
           </Backdrop>
         )}
 
-        <IconButton onClick={toggleDrawer} className={classes.iconButton} ariaLabel="More">
+        <IconButton onClick={toggleDrawer} className={classes.iconButton} aria-label="More">
           <MoreVertRounded/>
         </IconButton>
         <Drawer anchor="right" open={openDrawer} onClose={toggleDrawer} onClick={toggleDrawer}>
@@ -192,7 +226,7 @@ export default function NavBar(props) {
               <ListItemIcon><HelpOutlineRounded/></ListItemIcon>
               <ListItemText disableTypography className={classes.listText}>How to play</ListItemText>
             </ListItem>
-            <ListItem button onClick={props.toggleControlPanel}>
+            <ListItem button onClick={props.resetControlPanel}>
               <ListItemIcon><VideogameAssetRounded/></ListItemIcon>
               <ListItemText disableTypography className={classes.listText}>Controls</ListItemText>
             </ListItem>

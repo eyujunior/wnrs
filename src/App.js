@@ -185,8 +185,8 @@ function App(props) {
   return (
     <>
       <CssBaseline/>
-      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} 
-        onDeckChange={onDeckChange} toggleControlPanel={() => setPanels({...panels, control: 0})} fsHandle={props.fsHandle}/>
+      <NavBar level={level} onLevelChange={onLevelChange} changeColor={props.changeColor} playDecks={playDecks} control={panels.control}
+        onDeckChange={onDeckChange} resetControlPanel={() => setPanels({...panels, control: 0})} toggleControlPanel={toggleControlPanel} fsHandle={props.fsHandle}/>
 
       <div onClick={handleBack} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}} className={`${classes.nav} ${classes.leftNav}`}/>
       <div onClick={handleNext} style={{height: `calc(${height}px - env(safe-area-inset-top, 0px)`}} className={`${classes.nav} ${classes.rightNav}`}/>

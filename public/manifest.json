@@ -25,7 +25,8 @@
     {
       "src": "logo-maskable.png",
       "type": "image/png",
-      "sizes": "any maskable"
+      "sizes": "512x512",
+      "purpose": "any maskable"
     }
   ],
   "start_url": ".",

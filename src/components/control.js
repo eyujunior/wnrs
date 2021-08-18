@@ -1,5 +1,5 @@
 import { makeStyles, Backdrop } from '@material-ui/core'
-import { ArrowUpwardRounded, KeyboardArrowLeftRounded, KeyboardArrowRightRounded } from '@material-ui/icons'
+import { KeyboardArrowLeftRounded, KeyboardArrowRightRounded } from '@material-ui/icons'
 
 const smallSize = [360, 248]
 const largeSize = [480, 330]
@@ -112,7 +112,7 @@ export default function Control(props) {
           </div>
         </div>
       : null }
-      {props.control === 1
+      {/*props.control === 1
       ? <div className={`${classes.backdropContent} ${classes.fixedTooltip} ${classes.level}`}>
         <ArrowUpwardRounded/>
         <p className={classes.title}>Change level here</p>
@@ -125,7 +125,7 @@ export default function Control(props) {
           <p className={classes.title}>Change deck here</p>
           <p className={`${classes.title} ${classes.subtitle}`}>Some decks are best used when added<br/> to the original WNRS card game.</p>
         </div>
-      : null} 
+      : null*/} 
     </Backdrop>
   )
 }

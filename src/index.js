@@ -1,12 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { StrictMode } from 'react';
+import { render } from 'react-dom';
 import ThemeApp from './ThemeApp';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
-ReactDOM.render(
-  <React.StrictMode>
+render(
+  <StrictMode>
       <ThemeApp />
-  </React.StrictMode>,
+  </StrictMode>,
   document.getElementById('root')
 );
 

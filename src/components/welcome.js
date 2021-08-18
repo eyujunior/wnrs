@@ -28,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 400,
     textTransform: 'none',
     fontSize: '0.8em'
+  },
+  warning: {
+    backgroundColor: theme.palette.common.white,
+    color: theme.palette.primary.main,
+    borderRadius: theme.spacing(3),
+    padding: theme.spacing(2, 2),
   }
 }));
 
@@ -39,6 +45,7 @@ export default function Welcome(props) {
         <p><u>We're not really strangers</u></p>
         <p>Warning:<br/>Feelings may arise.</p>
         <p>Ready?</p>
+        <br/>
         <Button className={classes.button} size="large" variant="outlined" onClick={props.toggleWelcomePanel(true)}>
           Show control &nbsp; <VideogameAssetRounded/>
         </Button>
