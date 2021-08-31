@@ -2,6 +2,19 @@
 
 Play WNRS online in [jonathan-lph.github.io/wnrs](https://jonathan-lph.github.io/wnrs). No ads. No profits. No downloads.
 
+### Discontinued
+
+The app is now discontinued per official WNRS request. You can find the source files or questions for the decks under
+```
+src/decks
+```
+or use 
+```
+npm install
+npm run start
+```
+to start your own app locally. Go wild!
+
 ### Available Decks (All available!)
 
 - Main deck
@@ -25,7 +38,7 @@ Play WNRS online in [jonathan-lph.github.io/wnrs](https://jonathan-lph.github.io
 
 ### Missing Decks
 
-None that known of right now! Thanks for all the support!
+- New WNRS x Valetino Pack (Black & Gold)
 
 ### Credits
 
@@ -40,8 +53,8 @@ Thanks to various sources to make this possible:
 - [Breakup Edition PDF](https://docs.google.com/document/d/1-MPhFVRuzj4LZcatqvYJRKnYkIQOwxHr1sYwJ6WYrWM/edit?usp=sharing)
 - H.G. for 
   - Completing the Breakup Edition and 
-  - Providing the Self-love Edition, Healing Edition, Forgiveness Edition, and the Own It Expansion
-- [@cecrandell](https://github.com/cecrandell/) for the Voting Edition
+  - Providing the Self-love Edition, Healing Edition, and the Own It Expansion
+- [@cecrandell](https://github.com/cecrandell/) for Voting Edition and Forgiveness Edition 
 - [u/songbirdly](https://www.reddit.com/user/songbirdly) for the Cann Expansion
 
 I do not own any of the resources above. If you suspect this is copyright infrigment and wish to have this take down, please contact me and I will respond asap.
