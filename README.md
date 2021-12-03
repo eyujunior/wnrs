@@ -8,12 +8,14 @@ The app is now discontinued per official WNRS request. You can find the source f
 ```
 src/decks
 ```
-or use 
+To install locally, download and install NPM [here](https://nodejs.org/en/download/) and run the following commands.
 ```
+git clone https://github.com/jonathan-lph/wnrs.git
+cd wnrs
 npm install
 npm run start
 ```
-to start your own app locally. Go wild!
+You should be able to use the app in `localhost:3000/wnrs`. Get wild!
 
 ### Available Decks (All available!)
 
